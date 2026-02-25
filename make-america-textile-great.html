@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make America Textile Great Again</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #132240;
+    --red: #c8102e;
+    --red-light: #e63950;
+    --gold: #d4a017;
+    --cream: #f5f0e8;
+    --cotton: #faf7f2;
+    --gray: #8a9ab5;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 900;
+    background: rgba(10, 22, 40, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200, 16, 46, 0.3);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--red);
+    color: var(--white) !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 80px 80px;
+    background: 
+      linear-gradient(135deg, rgba(10,22,40,0.97) 55%, rgba(200,16,46,0.15) 100%),
+      var(--navy);
+  }
+
+  .hero-stars {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,0.35) 0%, transparent 100%);
+  }
+
+  .hero-stripe {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      180deg,
+      var(--red) 0px,
+      var(--red) 60px,
+      transparent 60px,
+      transparent 120px
+    );
+    opacity: 0.06;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 780px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+  .hero-title .accent { color: var(--red); }
+  .hero-title .gold { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--gray);
+    max-width: 560px;
+    margin-bottom: 48px;
+  }
+  .hero-subtitle strong { color: var(--cream); }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .stat-block { }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+    max-width: 120px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+    padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, transform 0.2s;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  .hero-cotton-icon {
+    position: absolute;
+    right: 80px;
+    bottom: 80px;
+    width: 320px;
+    height: 320px;
+    opacity: 0.08;
+    font-size: 300px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 120px 80px;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .section-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--gray);
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  /* PROBLEM SECTION */
+  #problem {
+    background: var(--navy-mid);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .crisis-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .crisis-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--red);
+    padding: 24px 20px;
+    border-radius: 4px;
+  }
+  .crisis-card .big-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--red);
+    line-height: 1;
+  }
+  .crisis-card p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  .problem-visual {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 40px;
+  }
+
+  .flow-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 32px;
+  }
+
+  .cotton-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .flow-step:last-child { border-bottom: none; }
+
+  .flow-flag {
+    width: 44px;
+    height: 30px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .flow-info { flex: 1; }
+  .flow-country {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--cream);
+  }
+  .flow-desc {
+    font-size: 0.78rem;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .flow-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-align: right;
+  }
+  .flow-price.red { color: var(--red); }
+  .flow-price.gold { color: var(--gold); }
+  .flow-price.green { color: #4caf50; }
+
+  .flow-arrow {
+    text-align: center;
+    color: var(--red);
+    font-size: 1.2rem;
+    opacity: 0.5;
+    padding: 4px 0;
+  }
+
+  /* COST MAP SECTION */
+  #costmap {
+    background: var(--navy);
+    overflow: hidden;
+  }
+
+  .costmap-header {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+  }
+
+  .cost-breakdown-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .cost-chain {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 36px;
+  }
+
+  .cost-chain-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .cost-chain-title.india { color: #ff9800; }
+  .cost-chain-title.usa { color: #4caf50; }
+
+  .cost-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .cost-line:last-child { border-bottom: none; }
+
+  .cost-item-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cost-item-label .icon { font-size: 1rem; opacity: 0.8; }
+
+  .cost-item-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--cream);
+  }
+
+  .cost-total {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cost-total.bad { background: rgba(200,16,46,0.15); border: 1px solid rgba(200,16,46,0.3); }
+  .cost-total.good { background: rgba(76,175,80,0.15); border: 1px solid rgba(76,175,80,0.3); }
+
+  .cost-total-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .cost-total.bad .cost-total-label { color: var(--red); }
+  .cost-total.good .cost-total-label { color: #4caf50; }
+
+  .cost-total-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+  }
+  .cost-total.bad .cost-total-price { color: var(--red); }
+  .cost-total.good .cost-total-price { color: #4caf50; }
+
+  .savings-callout {
+    background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(200,16,46,0.1));
+    border: 1px solid rgba(212,160,23,0.4);
+    border-radius: 8px;
+    padding: 32px;
+    margin-top: 40px;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .savings-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .savings-text h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .savings-text p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* MAP VISUAL */
+  .map-visual {
+    max-width: 900px;
+    margin: 60px auto 0;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 48px;
+    text-align: center;
+  }
+
+  .map-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 36px;
+  }
+
+  .journey-path {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+
+  .journey-stop {
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .journey-stop .emoji { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  .journey-stop .place {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--cream);
+  }
+  .journey-stop .price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+  .journey-stop .add {
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+
+  .journey-arrow {
+    font-size: 1.5rem;
+    color: var(--red);
+    opacity: 0.6;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  .journey-total {
+    width: 100%;
+    margin-top: 32px;
+    padding: 20px;
+    background: rgba(200,16,46,0.12);
+    border: 1px solid rgba(200,16,46,0.25);
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    color: var(--gray);
+  }
+  .journey-total strong {
+    color: var(--red);
+    font-size: 1.5rem;
+  }
+  .journey-total .vs {
+    margin: 0 16px;
+    color: var(--gray);
+  }
+  .journey-total .domestic {
+    color: #4caf50;
+    font-size: 1.5rem;
+  }
+
+  /* FARM TO WEAR */
+  #farmtowear {
+    background: var(--navy-mid);
+  }
+
+  .farmtowear-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+
+  .phase-step {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: relative;
+  }
+  .phase-step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(200,16,46,0.15);
+    border: 1px solid rgba(200,16,46,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--red);
+    flex-shrink: 0;
+  }
+
+  .step-content h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .farmtowear-right {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 40px;
+  }
+
+  .supply-chain-viz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .chain-node {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .chain-node-icon { font-size: 2rem; }
+  .chain-node-text { }
+  .chain-node-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--cream);
+  }
+  .chain-node-sub {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .chain-connector {
+    width: 2px;
+    height: 28px;
+    background: linear-gradient(to bottom, var(--red), var(--gold));
+    margin: 4px 0;
+    border-radius: 2px;
+    opacity: 0.6;
+  }
+
+  /* OLYMPICS */
+  #olympics {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #olympics::before {
+    content: '2028';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 20rem;
+    color: rgba(255,255,255,0.02);
+    letter-spacing: -0.05em;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .olympics-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+  }
+
+  .olympic-rings {
+    font-size: 3rem;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+  }
+
+  .olympics-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .olympic-feature {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .of-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(212,160,23,0.15);
+    border: 1px solid rgba(212,160,23,0.3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .of-text h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .of-text p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .olympics-badge {
+    background: linear-gradient(135deg, rgba(212,160,23,0.12), rgba(10,22,40,0.5));
+    border: 1px solid rgba(212,160,23,0.3);
+    border-radius: 12px;
+    padding: 48px 40px;
+    text-align: center;
+  }
+
+  .badge-star {
+    font-size: 4rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .badge-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .badge-sub {
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .badge-flag {
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* EDA SECTION */
+  #eda {
+    background: var(--navy-mid);
+  }
+
+  .eda-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .eda-phases {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .eda-phase {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 24px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .eda-phase-badge {
+    background: rgba(200,16,46,0.15);
+    border: 1px solid rgba(200,16,46,0.3);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .eda-phase-info h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+  .eda-phase-info p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .eda-phase-info .amount {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold);
+    margin-top: 8px;
+  }
+
+  .eda-supporters {
+    margin-top: 16px;
+  }
+
+  .supporters-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 20px;
+  }
+
+  .supporter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .supporter {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+  }
+
+  .supporter-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(212,160,23,0.1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .supporter-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--cream);
+  }
+  .supporter-role {
+    font-size: 0.78rem;
+    color: var(--gray);
+  }
+
+  /* CTA */
+  #cta {
+    background: var(--red);
+    padding: 100px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.05) 0px,
+      rgba(0,0,0,0.05) 1px,
+      transparent 1px,
+      transparent 20px
+    );
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 5;
+  }
+
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--white);
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .cta-sub {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-white {
+    background: var(--white);
+    color: var(--red);
+    padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+  .btn-white:hover { transform: translateY(-2px); }
+
+  .btn-outline-white {
+    background: transparent;
+    color: var(--white);
+    padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-outline-white:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #060f1e;
+    padding: 48px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--gray);
+  }
+  .footer-brand span { color: var(--red); }
+
+  .footer-credit {
+    font-size: 0.82rem;
+    color: rgba(138,154,181,0.6);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+
+  /* DIVIDER */
+  .red-line {
+    width: 60px;
+    height: 4px;
+    background: var(--red);
+    margin-bottom: 32px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .fade-up-delay-1 { animation-delay: 0.15s; animation-fill-mode: both; opacity: 0; }
+  .fade-up-delay-2 { animation-delay: 0.3s; animation-fill-mode: both; opacity: 0; }
+  .fade-up-delay-3 { animation-delay: 0.45s; animation-fill-mode: both; opacity: 0; }
+  .fade-up-delay-4 { animation-delay: 0.6s; animation-fill-mode: both; opacity: 0; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    section { padding: 80px 32px; }
+    nav { padding: 0 24px; }
+    #hero { padding: 100px 32px 60px; }
+    .problem-grid, .cost-breakdown-container, .farmtowear-grid, .olympics-grid, .eda-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .nav-links { display: none; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .hero-cotton-icon { display: none; }
+    #olympics::before { font-size: 8rem; }
+  }
+
+  .highlight-box {
+    background: rgba(212,160,23,0.08);
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 6px;
+    padding: 24px;
+    margin-top: 24px;
+  }
+  .highlight-box p {
+    font-size: 0.95rem;
+    color: var(--cream);
+    line-height: 1.7;
+  }
+  .highlight-box strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MATGA <span>★</span></div>
+  <ul class="nav-links">
+    <li><a href="#problem">The Crisis</a></li>
+    <li><a href="#costmap">Cost Map</a></li>
+    <li><a href="#farmtowear">Farm to Wear</a></li>
+    <li><a href="#olympics">LA 2028</a></li>
+    <li><a href="#eda">EDA Initiative</a></li>
+    <li><a href="#cta" class="nav-cta">Join Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-stars"></div>
+  <div class="hero-stripe"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up">Make America Textile Great Again</div>
+    <h1 class="hero-title fade-up fade-up-delay-1">
+      America Grows<br>
+      the World's Finest<br>
+      <span class="accent">Cotton.</span><br>
+      Then Ships It <span class="gold">Away.</span>
+    </h1>
+    <p class="hero-subtitle fade-up fade-up-delay-2">
+      <strong>90% of U.S. premium Pima cotton is exported</strong> because we have no yarn spinning infrastructure on the West Coast. The result: American farmers in crisis, and America buying back its own fiber at 3× the price.
+    </p>
+    <div class="hero-stats fade-up fade-up-delay-3">
+      <div class="stat-block">
+        <div class="stat-num">90%</div>
+        <div class="stat-label">of US cotton fiber exported unspun</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">57%</div>
+        <div class="stat-label">rise in US farm bankruptcies (2025)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">18.2%</div>
+        <div class="stat-label">unemployment in Yuma, AZ</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">$0</div>
+        <div class="stat-label">ring-spun yarn facilities in the western US</div>
+      </div>
+    </div>
+    <div class="hero-actions fade-up fade-up-delay-4">
+      <a href="#farmtowear" class="btn-primary">The Solution</a>
+      <a href="#costmap" class="btn-outline">See the Numbers</a>
+    </div>
+  </div>
+
+  <div class="hero-cotton-icon">🌿</div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section id="problem">
+  <div class="problem-grid">
+    <div>
+      <div class="section-label">The Dual Crisis</div>
+      <h2 class="section-title">U.S. Cotton Farmers Are Being Squeezed Out of Their Own Market</h2>
+      <p class="section-body">
+        American cotton farmers grow some of the world's finest fiber — including Supima and Pima cotton found in luxury dress shirts worldwide. Yet with no domestic spinning infrastructure on the West Coast, that fiber gets shipped to India, spun into yarn, and sold back to American brands at a massive markup. Farmers see none of that value.
+      </p>
+      <p class="section-body">
+        The human toll is devastating: agriculture worker suicides are running at three times the national average. The system is broken — and it doesn't have to be.
+      </p>
+
+      <div class="crisis-cards">
+        <div class="crisis-card">
+          <div class="big-num">$1.65<span style="font-size:1rem">/lb</span></div>
+          <p>What a US Pima cotton farmer receives for their premium fiber</p>
+        </div>
+        <div class="crisis-card">
+          <div class="big-num">$4.50<span style="font-size:1rem">/lb</span></div>
+          <p>What US brands pay for Indian-spun 30/1 Supima yarn — delivered back to America</p>
+        </div>
+        <div class="crisis-card">
+          <div class="big-num">3×</div>
+          <p>Higher suicide rate for agricultural workers vs. national average</p>
+        </div>
+        <div class="crisis-card">
+          <div class="big-num">87%</div>
+          <p>Of US cotton fiber exported due to lack of domestic spinning capacity</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-visual">
+      <div class="flow-title">The Broken Cotton Value Chain</div>
+      <div class="cotton-flow">
+        <div class="flow-step">
+          <div class="flow-flag">🌾</div>
+          <div class="flow-info">
+            <div class="flow-country">US Cotton Farms (AZ / CA / TX)</div>
+            <div class="flow-desc">Farmers grow world-class Pima cotton</div>
+          </div>
+          <div class="flow-price gold">$1.65/lb</div>
+        </div>
+        <div class="flow-arrow">↓ Exported Overseas</div>
+        <div class="flow-step">
+          <div class="flow-flag">🚢</div>
+          <div class="flow-info">
+            <div class="flow-country">Ocean Freight to India</div>
+            <div class="flow-desc">+$0.40/lb shipping cost, weeks of delay</div>
+          </div>
+          <div class="flow-price" style="color:var(--gray)">+$0.40</div>
+        </div>
+        <div class="flow-arrow">↓ Spun Abroad</div>
+        <div class="flow-step">
+          <div class="flow-flag">🏭</div>
+          <div class="flow-info">
+            <div class="flow-country">Indian Spinning Mills</div>
+            <div class="flow-desc">Spun into 30/1 ring-spun yarn (+$0.70/lb)</div>
+          </div>
+          <div class="flow-price" style="color:var(--gray)">+$0.70</div>
+        </div>
+        <div class="flow-arrow">↓ Shipped Back</div>
+        <div class="flow-step">
+          <div class="flow-flag">✈️</div>
+          <div class="flow-info">
+            <div class="flow-country">Return Freight to US</div>
+            <div class="flow-desc">+$0.40/lb, Supima royalty +$0.20/lb, tariff + margin</div>
+          </div>
+          <div class="flow-price" style="color:var(--gray)">+$1.70+</div>
+        </div>
+        <div class="flow-arrow">↓ US Brands Pay</div>
+        <div class="flow-step" style="border:1px solid rgba(200,16,46,0.3); border-radius:6px; padding:16px 12px; background:rgba(200,16,46,0.06);">
+          <div class="flow-flag">🏷️</div>
+          <div class="flow-info">
+            <div class="flow-country">Final Cost to US Textile Brands</div>
+            <div class="flow-desc">American fiber, foreign labor, premium price</div>
+          </div>
+          <div class="flow-price red">$4.50/lb</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COST MAP -->
+<section id="costmap">
+  <div class="costmap-header">
+    <div class="section-label">The Numbers</div>
+    <h2 class="section-title">We Can Beat $4.50/lb.<br>Domestically.</h2>
+    <p class="section-body">
+      By building a ring-spun yarn facility in Yuma, Arizona, we can transform $1.65/lb Pima cotton fiber into $3.00/lb premium yarn — entirely on American soil. That's competitive with imported yarn even before tariffs, and it keeps every dollar in the American economy.
+    </p>
+  </div>
+
+  <div class="cost-breakdown-container">
+    <div class="cost-chain">
+      <div class="cost-chain-title india">🇮🇳 The India Route — Current Reality</div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">🌾</span> US Pima Cotton (raw fiber)</span>
+        <span class="cost-item-value">$1.65/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">🚢</span> Ocean freight to India</span>
+        <span class="cost-item-value">+$0.40/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">🏭</span> Spinning cost (30/1 ring-spun)</span>
+        <span class="cost-item-value">+$0.70/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">✈️</span> Return freight to US</span>
+        <span class="cost-item-value">+$0.40/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">©️</span> Supima brand royalty</span>
+        <span class="cost-item-value">+$0.20/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">📋</span> Tariff + margin</span>
+        <span class="cost-item-value">+$1.15/lb</span>
+      </div>
+      <div class="cost-total bad">
+        <span class="cost-total-label">🔴 Total Cost to US Brands</span>
+        <span class="cost-total-price">$4.50/lb</span>
+      </div>
+    </div>
+
+    <div class="cost-chain">
+      <div class="cost-chain-title usa">🇺🇸 The Yuma Route — Our Vision</div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">🌾</span> US Pima Cotton (raw fiber)</span>
+        <span class="cost-item-value">$1.65/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">🚛</span> Local transport (AZ/CA farms)</span>
+        <span class="cost-item-value">+$0.15/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">🏭</span> Domestic spinning (Yuma facility)</span>
+        <span class="cost-item-value">+$0.85/lb</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">🚢</span> No ocean freight needed</span>
+        <span class="cost-item-value">$0.00</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">✅</span> No return shipping</span>
+        <span class="cost-item-value">$0.00</span>
+      </div>
+      <div class="cost-line">
+        <span class="cost-item-label"><span class="icon">📦</span> Domestic logistics to LA/SD</span>
+        <span class="cost-item-value">+$0.35/lb</span>
+      </div>
+      <div class="cost-total good">
+        <span class="cost-total-label">✅ Total Cost — American Made</span>
+        <span class="cost-total-price">$3.00/lb</span>
+      </div>
+    </div>
+
+    <div class="savings-callout">
+      <div class="savings-num">$1.50</div>
+      <div class="savings-text">
+        <h3>Savings Per Pound — Keeping Value in America</h3>
+        <p>That's $1.50/lb less than imported Indian-spun yarn, even at current prices — and exponentially better for farmers, workers, and the US economy. A men's dress shirt uses roughly 0.5–0.6 lbs of yarn. This initiative makes Made-in-America fine shirts commercially viable for the first time in decades.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNEY MAP VISUAL -->
+  <div class="map-visual" style="margin-top: 60px;">
+    <div class="map-title">The Cotton Journey: India vs. Yuma, AZ</div>
+    <div class="journey-path">
+      <div class="journey-stop">
+        <span class="emoji">🌾</span>
+        <div class="place">Arizona / California</div>
+        <div class="price">$1.65/lb</div>
+        <div class="add">Pima Cotton Farm</div>
+      </div>
+      <div class="journey-arrow">→</div>
+      <div class="journey-stop" style="opacity:0.5;">
+        <span class="emoji">🚢</span>
+        <div class="place">Pacific Ocean</div>
+        <div class="price" style="color:var(--red)">+$0.40</div>
+        <div class="add">~3 weeks</div>
+      </div>
+      <div class="journey-arrow" style="opacity:0.4;">→</div>
+      <div class="journey-stop" style="opacity:0.5;">
+        <span class="emoji">🇮🇳</span>
+        <div class="place">India</div>
+        <div class="price" style="color:var(--red)">+$0.70</div>
+        <div class="add">Spinning Mills</div>
+      </div>
+      <div class="journey-arrow" style="opacity:0.4;">→</div>
+      <div class="journey-stop" style="opacity:0.5;">
+        <span class="emoji">✈️</span>
+        <div class="place">Return to US</div>
+        <div class="price" style="color:var(--red)">+$0.80+</div>
+        <div class="add">Freight + tariff</div>
+      </div>
+      <div class="journey-arrow" style="opacity:0.4;">→</div>
+      <div class="journey-stop">
+        <span class="emoji">🏷️</span>
+        <div class="place">US Brands Pay</div>
+        <div class="price" style="color:var(--red)">$4.50/lb</div>
+        <div class="add">for American cotton</div>
+      </div>
+    </div>
+
+    <div class="journey-total">
+      The India route: <strong>$4.50/lb</strong>
+      <span class="vs">vs.</span>
+      Yuma domestic route: <span class="domestic">$3.00/lb</span>
+      &nbsp;—&nbsp; Same American fiber. <strong>No ocean voyage required.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- FARM TO WEAR -->
+<section id="farmtowear">
+  <div class="farmtowear-grid">
+    <div>
+      <div class="section-label">Farm to Wear Campaign</div>
+      <h2 class="section-title">From Arizona Field to American Wardrobe</h2>
+      <p class="section-body">
+        The United States cannot currently manufacture a fine-quality men's dress shirt because we cannot spin the necessary high-quality ring-spun yarn domestically. We are changing that — creating a fully traceable, 100% American supply chain from seed to finished garment.
+      </p>
+
+      <div class="phase-steps">
+        <div class="phase-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>🌾 US Pima & Supima Cotton — Arizona & California Farms</h4>
+            <p>Partner with Arizona Cotton Growers Association and California Pima farms to source direct. Stable long-term contracts replace volatile commodity futures.</p>
+          </div>
+        </div>
+        <div class="phase-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>🏭 Eco-Spun Yuma Spinning Facility</h4>
+            <p>State-of-the-art ring-spinning plant in Yuma, AZ — the first of its kind in the western United States. Produces premium 30/1 and finer yarn counts for luxury apparel.</p>
+          </div>
+        </div>
+        <div class="phase-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>🚛 Direct to Los Angeles via I-8 / Union Pacific</h4>
+            <p>169 miles from San Diego, 269 miles from Los Angeles. Domestic logistics eliminate ocean freight delays and costs.</p>
+          </div>
+        </div>
+        <div class="phase-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>👔 American Textile & Apparel Brands</h4>
+            <p>Reliable, fast, American-made yarn delivered to LA's garment district and domestic manufacturers — enabling premium "Made in USA" products at competitive prices.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="margin-top:32px;">
+        <p>The US has not been able to make a <strong>fine-quality men's dress shirt</strong> domestically for decades — not because of labor costs, but because there is simply <strong>no facility to spin the required premium yarn</strong> on the West Coast. We are building that facility.</p>
+      </div>
+    </div>
+
+    <div class="farmtowear-right">
+      <div style="font-family: 'Barlow Condensed', sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray); margin-bottom:32px;">
+        The Eco-Spun Supply Chain
+      </div>
+
+      <div class="supply-chain-viz">
+        <div class="chain-node">
+          <div class="chain-node-icon">🌾</div>
+          <div class="chain-node-text">
+            <div class="chain-node-title">Arizona / California / Texas Farms</div>
+            <div class="chain-node-sub">US Pima & Supima cotton fiber • $1.65/lb</div>
+          </div>
+        </div>
+        <div class="chain-connector"></div>
+        <div class="chain-node">
+          <div class="chain-node-icon">🏭</div>
+          <div class="chain-node-text">
+            <div class="chain-node-title">Eco-Spun Yuma Facility</div>
+            <div class="chain-node-sub">Ring-spinning • 200+ jobs • Yuma County, AZ</div>
+          </div>
+        </div>
+        <div class="chain-connector"></div>
+        <div class="chain-node">
+          <div class="chain-node-icon">🧵</div>
+          <div class="chain-node-text">
+            <div class="chain-node-title">Premium Domestic Yarn</div>
+            <div class="chain-node-sub">30/1 ring-spun and finer counts • $3.00/lb</div>
+          </div>
+        </div>
+        <div class="chain-connector"></div>
+        <div class="chain-node">
+          <div class="chain-node-icon">🚛</div>
+          <div class="chain-node-text">
+            <div class="chain-node-title">I-8 / Union Pacific Rail</div>
+            <div class="chain-node-sub">169 mi to San Diego • 269 mi to Los Angeles</div>
+          </div>
+        </div>
+        <div class="chain-connector"></div>
+        <div class="chain-node" style="border-color: rgba(76,175,80,0.4); background: rgba(76,175,80,0.06);">
+          <div class="chain-node-icon">🇺🇸</div>
+          <div class="chain-node-text">
+            <div class="chain-node-title" style="color:#4caf50;">Made in America</div>
+            <div class="chain-node-sub">Garments, shirts, uniforms — 100% domestic</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:28px; padding:20px; background:rgba(212,160,23,0.08); border:1px solid rgba(212,160,23,0.2); border-radius:4px;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Foreign Trade Zone #219</div>
+        <p style="font-size:0.85rem; color:var(--gray); line-height:1.6;">Yuma County's FTZ #219 allows qualified manufacturers to defer, reduce, or eliminate customs duties — giving domestic production a critical competitive advantage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OLYMPICS -->
+<section id="olympics">
+  <div class="olympics-grid">
+    <div>
+      <div class="section-label">LA 2028 Olympics</div>
+      <h2 class="section-title">Dress the World in American Cotton</h2>
+      <p class="section-body">
+        The 2028 Los Angeles Olympics presents a once-in-a-generation opportunity: equip athletes, officials, and millions of fans with garments made entirely from American cotton, spun in Arizona, and sewn in Los Angeles. A global stage for American manufacturing.
+      </p>
+
+      <div class="olympics-features">
+        <div class="olympic-feature">
+          <div class="of-icon">🏟️</div>
+          <div class="of-text">
+            <h4>Official "Made in LA" Olympic Shirt Campaign</h4>
+            <p>100% US Pima cotton → Yuma-spun yarn → LA-manufactured shirts. Every shirt tells the story of American agriculture and manufacturing revival.</p>
+          </div>
+        </div>
+        <div class="olympic-feature">
+          <div class="of-icon">👔</div>
+          <div class="of-text">
+            <h4>Premium Men's Dress Shirts — First Time in Decades</h4>
+            <p>The Yuma facility enables fine-yarn production required for luxury dress shirts — a product category America has been unable to manufacture domestically.</p>
+          </div>
+        </div>
+        <div class="olympic-feature">
+          <div class="of-icon">🌐</div>
+          <div class="of-text">
+            <h4>Global Showcase for US Supply Chain</h4>
+            <p>Billions watching worldwide. "Made in America" on every label — saving Arizona and California cotton farmers while putting Los Angeles back on the global fashion map.</p>
+          </div>
+        </div>
+        <div class="olympic-feature">
+          <div class="of-icon">🤝</div>
+          <div class="of-text">
+            <h4>Polo Ralph Lauren &amp; LA Textile Partners</h4>
+            <p>Building relationships with domestic brands and the LA Textile Association to create a lasting American premium garment ecosystem beyond the Games.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="olympics-badge">
+      <span class="badge-star">🏅</span>
+      <div class="badge-title">Los Angeles 2028<br>American Cotton<br>Initiative</div>
+      <p class="badge-sub">
+        Partnering with the LA Textile Association, domestic apparel brands, and the Yu-Pima Cotton Initiative to produce the first 100% American-made Olympic shirts — from Arizona cotton fields to Los Angeles garment factories.
+      </p>
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:20px; margin:20px 0;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.8rem; letter-spacing:0.15em; color:var(--gray); margin-bottom:12px;">FARM TO WEAR IMPACT</div>
+        <div style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.8rem; color:var(--gold);">AZ</div>
+            <div style="font-size:0.75rem; color:var(--gray);">Cotton Farms</div>
+          </div>
+          <div style="text-align:center; color:var(--gold); font-size:1.5rem;">→</div>
+          <div style="text-align:center;">
+            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.8rem; color:var(--gold);">Yuma</div>
+            <div style="font-size:0.75rem; color:var(--gray);">Spinning</div>
+          </div>
+          <div style="text-align:center; color:var(--gold); font-size:1.5rem;">→</div>
+          <div style="text-align:center;">
+            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.8rem; color:var(--gold);">LA</div>
+            <div style="font-size:0.75rem; color:var(--gray);">Made</div>
+          </div>
+        </div>
+      </div>
+      <div class="badge-flag">🇺🇸</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDA INITIATIVE -->
+<section id="eda">
+  <div class="eda-grid">
+    <div>
+      <div class="section-label">Federal Partnership</div>
+      <h2 class="section-title">The Yu-Pima Cotton Initiative & EDA Support</h2>
+      <p class="section-body">
+        We are working with the U.S. Economic Development Administration to bring ring-spun yarn manufacturing to the western United States for the first time. Yuma, Arizona — with its Foreign Trade Zone, strategic location, and 18.2% unemployment — is the ideal location.
+      </p>
+
+      <div class="eda-phases">
+        <div class="eda-phase">
+          <div class="eda-phase-badge">Phase 1</div>
+          <div class="eda-phase-info">
+            <h4>Planning &amp; Capitalization</h4>
+            <p>Feasibility studies, financial structures, market analysis, and EDA Economic Adjustment Assistance grants to de-risk the project.</p>
+            <div class="amount">Est. Request: $1.1M – $6.5M (EAA / RLF / Recompete Phase 1)</div>
+          </div>
+        </div>
+        <div class="eda-phase">
+          <div class="eda-phase-badge">Phase 2</div>
+          <div class="eda-phase-info">
+            <h4>Infrastructure &amp; Job Creation</h4>
+            <p>Construction of the Eco-Spun yarn spinning facility in Yuma County via EDA Public Works Construction Grant, creating 200+ manufacturing jobs.</p>
+            <div class="amount">Est. Request: $1.5M – $5M (Public Works)</div>
+          </div>
+        </div>
+        <div class="eda-phase">
+          <div class="eda-phase-badge">Phase 3</div>
+          <div class="eda-phase-info">
+            <h4>Workforce Development</h4>
+            <p>Good Jobs Challenge, STEM Talent Challenge, and equity-focused training through Arizona Western College — reducing Yuma's structural unemployment.</p>
+            <div class="amount">Est. Request: $21M – $46M (Recompete + Good Jobs + STEM)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eda-supporters">
+      <div class="supporters-title">Letters of Support &amp; Key Partners</div>
+      <div class="supporter-list">
+        <div class="supporter">
+          <div class="supporter-icon">🎓</div>
+          <div>
+            <div class="supporter-name">Arizona Western College</div>
+            <div class="supporter-role">Dr. Daniel P. Corr, President — Workforce training partner, Hispanic Serving Institution</div>
+          </div>
+        </div>
+        <div class="supporter">
+          <div class="supporter-icon">🌾</div>
+          <div>
+            <div class="supporter-name">Arizona Cotton Growers Association</div>
+            <div class="supporter-role">Jadee Rohner, Executive Director — Farmer supply partnerships</div>
+          </div>
+        </div>
+        <div class="supporter">
+          <div class="supporter-icon">🏭</div>
+          <div>
+            <div class="supporter-name">YUCO GIN, INC. II</div>
+            <div class="supporter-role">Robert Holman, General Manager — Cotton ginning supply chain partner</div>
+          </div>
+        </div>
+        <div class="supporter">
+          <div class="supporter-icon">🧵</div>
+          <div>
+            <div class="supporter-name">Fashion Color, Inc. / One Textile Co.</div>
+            <div class="supporter-role">Daniel Lee, President — Initiative lead, textile industry expertise</div>
+          </div>
+        </div>
+        <div class="supporter">
+          <div class="supporter-icon">🏛️</div>
+          <div>
+            <div class="supporter-name">Greater Yuma Economic Development Corp.</div>
+            <div class="supporter-role">GYEDC — Regional economic development coordination</div>
+          </div>
+        </div>
+        <div class="supporter">
+          <div class="supporter-icon">👔</div>
+          <div>
+            <div class="supporter-name">Supima / LA Textile Association</div>
+            <div class="supporter-role">Industry coordination — premium cotton brand licensing</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:28px; padding:24px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:6px;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:12px;">Why Yuma, Arizona</div>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7;">
+          ✅ Only 169 miles from San Diego, 269 miles from LA<br>
+          ✅ I-8 freeway + Union Pacific Rail access<br>
+          ✅ Foreign Trade Zone #219 — duty advantages<br>
+          ✅ Designated Distressed Area (18.2% unemployment)<br>
+          ✅ Adjacent to AZ, CA cotton growing regions<br>
+          ✅ Zero ring-spun yarn competition in western US
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-content">
+    <h2 class="cta-title">America Grew It.<br>America Should Spin It.</h2>
+    <p class="cta-sub">
+      Join the movement to bring premium yarn spinning back to the United States — saving farmers, creating jobs, and making "Made in America" a reality again from field to finished shirt.
+    </p>
+    <div class="cta-actions">
+      <a href="mailto:daniel@onetextileco.com" class="btn-white">Partner With Us</a>
+      <a href="#problem" class="btn-outline-white">Read Our Story</a>
+    </div>
+    <div style="margin-top:48px; font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; letter-spacing:0.15em; color:rgba(255,255,255,0.5); text-transform:uppercase;">
+      An Initiative by Fashion Color, Inc. &amp; One Textile Co. &nbsp;•&nbsp; Yuma, Arizona
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">MAKE AMERICA TEXTILE <span>GREAT AGAIN</span></div>
+  <div class="footer-credit">Yu-Pima Cotton Initiative • EDA Partnership • © 2026</div>
+  <div class="footer-links">
+    <a href="#problem">Crisis</a>
+    <a href="#costmap">Numbers</a>
+    <a href="#farmtowear">Farm to Wear</a>
+    <a href="#olympics">LA 2028</a>
+    <a href="#eda">EDA</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.crisis-card, .eda-phase, .phase-step, .supporter, .cost-chain, .olympic-feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

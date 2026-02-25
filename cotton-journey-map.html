@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotton's World Journey | MATGA</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600;700&family=Lora:ital@1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#060f1e}
+body{font-family:'DM Sans',sans-serif;color:#fff}
+#app{display:flex;flex-direction:column;width:100vw;height:100vh}
+
+/* NAV */
+#topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:58px;flex-shrink:0;
+  background:rgba(6,15,30,0.97);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  z-index:100;
+}
+.tb-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em}
+.tb-logo span{color:#BF0A30}
+.tb-c{text-align:center}
+.tb-t{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:rgba(255,255,255,0.5);letter-spacing:0.12em}
+.tb-s{font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.1em}
+.mbtns{display:flex;gap:6px}
+.mbtn{
+  padding:7px 16px;border-radius:100px;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;
+  border:1px solid rgba(255,255,255,0.14);background:transparent;color:rgba(255,255,255,0.45);
+  transition:all 0.2s;white-space:nowrap;
+}
+.mbtn:hover{background:rgba(255,255,255,0.08);color:#fff}
+.mbtn.on{background:#BF0A30;border-color:#BF0A30;color:#fff}
+.mbtn.on.g{background:#2E7D32;border-color:#4CAF50}
+
+/* MAP */
+#mw{flex:1;position:relative;overflow:hidden}
+#mc{display:block;width:100%;height:100%}
+
+/* TICKER */
+#tkr{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  background:rgba(4,10,22,0.92);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:14px;
+  padding:12px 28px;text-align:center;min-width:210px;z-index:50;
+}
+#tkr .tl{font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:3px}
+#tkr .tp{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;transition:color 0.6s}
+#tkr .ts{font-size:0.67rem;color:rgba(255,255,255,0.38);margin-top:4px}
+
+/* LOG */
+#log{position:absolute;left:14px;top:14px;width:252px;z-index:50;display:flex;flex-direction:column;gap:5px}
+.le{
+  background:rgba(4,10,22,0.88);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.07);
+  border-left:3px solid #BF0A30;border-radius:8px;
+  padding:9px 13px;
+  animation:slin 0.35s ease forwards;opacity:0;
+}
+.le.g{border-left-color:#4CAF50}
+@keyframes slin{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+.le-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.le-n{font-size:0.8rem;font-weight:700;color:#fff}
+.le-c{font-family:'Bebas Neue',sans-serif;font-size:1rem;flex-shrink:0}
+.le-c.b{color:#FFC04D}.le-c.a{color:#ff6b6b}.le-c.s{color:#81C784}
+.le-d{font-size:0.7rem;color:rgba(255,255,255,0.42);margin-top:3px;line-height:1.4}
+
+/* COMPARE */
+#cmp{
+  position:absolute;right:14px;top:14px;
+  background:rgba(4,10,22,0.9);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:14px;
+  padding:18px 20px;z-index:50;width:210px;display:none;
+}
+.cmp-h{font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px}
+.cmp-r{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.cmp-r:last-child{border:none}
+.cmp-l{font-size:0.78rem;color:rgba(255,255,255,0.5)}
+.cmp-v{font-family:'Bebas Neue',sans-serif;font-size:1.2rem}
+.cmp-v.r{color:#ff6b6b}.cmp-v.g{color:#81C784}
+
+/* LEGEND */
+#leg{
+  position:absolute;right:14px;bottom:64px;
+  background:rgba(4,10,22,0.85);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.08);border-radius:10px;
+  padding:13px 16px;z-index:50;min-width:172px;
+}
+.leg-h{font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:9px}
+.leg-r{display:flex;align-items:center;gap:9px;margin-bottom:6px;font-size:0.74rem;color:rgba(255,255,255,0.55)}
+.leg-d{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* STEP DOTS */
+#sdots{position:absolute;bottom:62px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:50}
+.sd{width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);transition:background 0.4s,width 0.3s}
+.sd.done{background:rgba(191,10,48,0.65)}
+.sd.act{background:#BF0A30;width:42px}
+.sd.gd.done{background:rgba(76,175,80,0.65)}
+.sd.gd.act{background:#4CAF50;width:42px}
+
+/* CONTROLS */
+#ctrl{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 28px;height:50px;flex-shrink:0;
+  background:rgba(4,10,22,0.97);
+  border-top:1px solid rgba(255,255,255,0.07);
+  z-index:100;gap:16px;
+}
+.cbtn{
+  padding:8px 20px;border-radius:100px;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;white-space:nowrap;
+}
+.cbtn.p{background:#BF0A30;color:#fff}.cbtn.p:hover{background:#8B0020}
+.cbtn.g2{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.12)}
+.cbtn.g2:hover{background:rgba(255,255,255,0.13)}
+#pbw{flex:1;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;cursor:pointer}
+#pb{height:100%;background:linear-gradient(to right,#BF0A30,#FFC04D);width:0%;transition:width 0.07s linear;border-radius:2px}
+#spw{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.35);font-size:0.7rem;font-weight:600}
+input[type=range]{-webkit-appearance:none;width:70px;height:3px;background:rgba(255,255,255,0.15);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:#BF0A30}
+
+/* INTRO */
+#intro{
+  position:absolute;inset:0;background:rgba(4,10,22,0.94);backdrop-filter:blur(6px);
+  z-index:200;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;
+  text-align:center;padding:40px;
+}
+.i-em{font-size:3.5rem}
+.i-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1;color:#fff}
+.i-t span{color:#BF0A30}
+.i-s{font-family:'Lora',serif;font-style:italic;font-size:1rem;color:rgba(255,255,255,0.55);max-width:460px;line-height:1.75}
+.i-b{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.ibtn{
+  padding:13px 28px;border-radius:100px;font-size:0.78rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;
+}
+.ibtn.p{background:#BF0A30;color:#fff}.ibtn.p:hover{background:#8B0020;transform:translateY(-2px)}
+.ibtn.g{background:rgba(76,175,80,0.2);color:#81C784;border:1px solid rgba(76,175,80,0.4)}.ibtn.g:hover{background:rgba(76,175,80,0.3);transform:translateY(-2px)}
+.ibtn.c{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.18)}.ibtn.c:hover{background:rgba(255,255,255,0.14);transform:translateY(-2px)}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="topbar">
+    <div class="tb-logo">M.A.T.G.A <span>★</span></div>
+    <div class="tb-c"><div class="tb-t">Cotton's World Journey</div><div class="tb-s">Interactive Animated Supply Chain Map</div></div>
+    <div class="mbtns">
+      <button class="mbtn on" id="b-india" onclick="go('india')">🇮🇳 India Route</button>
+      <button class="mbtn" id="b-usa" onclick="go('usa')">🇺🇸 Yuma Route</button>
+      <button class="mbtn" id="b-cmp" onclick="go('compare')">⚖️ Compare</button>
+    </div>
+  </div>
+  <div id="mw">
+    <canvas id="mc"></canvas>
+    <div id="tkr"><div class="tl">Running Cost / lb</div><div class="tp" id="tp">$1.65</div><div class="ts" id="ts">US Cotton Farm — Starting Price</div></div>
+    <div id="log"></div>
+    <div id="cmp"><div class="cmp-h">Cost Comparison / lb</div>
+      <div class="cmp-r"><span class="cmp-l">🇮🇳 India Route</span><span class="cmp-v r">$4.50</span></div>
+      <div class="cmp-r"><span class="cmp-l">🇺🇸 Yuma Route</span><span class="cmp-v g">$3.00</span></div>
+      <div class="cmp-r"><span class="cmp-l">✨ Savings</span><span class="cmp-v g">$1.50 (33%)</span></div>
+    </div>
+    <div id="leg">
+      <div class="leg-h">Legend</div>
+      <div class="leg-r"><div class="leg-d" style="background:#FFC04D"></div>Cotton Farm Origin</div>
+      <div class="leg-r"><div class="leg-d" style="background:#FF9800"></div>India Processing</div>
+      <div class="leg-r"><div class="leg-d" style="background:#4CAF50"></div>US Domestic Route</div>
+      <div class="leg-r"><div class="leg-d" style="background:#2196F3"></div>Ocean Shipping</div>
+      <div class="leg-r"><div class="leg-d" style="background:#BF0A30"></div>Costly Return</div>
+    </div>
+    <div id="sdots"></div>
+  </div>
+  <div id="ctrl">
+    <button class="cbtn g2" onclick="restart()">↺ Restart</button>
+    <button class="cbtn p" id="pbtn" onclick="togglePlay()">▶ &nbsp;Play</button>
+    <div id="pbw" onclick="seekClick(event)"><div id="pb"></div></div>
+    <div id="spw">Speed: <input type="range" id="sr" min="0.5" max="5" step="0.5" value="1.5" oninput="setSpd(this.value)"> <span id="sl">1.5×</span></div>
+  </div>
+</div>
+<div id="intro">
+  <div class="i-em">🌾</div>
+  <div class="i-t">Cotton's <span>World</span> Journey</div>
+  <div class="i-s">Watch US Pima cotton travel 16,000 miles to India and back — when it could be spun right here in Arizona for 33% less. Every mile is a dollar stolen from American farmers.</div>
+  <div class="i-b">
+    <button class="ibtn p" onclick="startWith('india')">▶ India Route — $4.50/lb</button>
+    <button class="ibtn g" onclick="startWith('usa')">▶ Yuma Route — $3.00/lb</button>
+    <button class="ibtn c" onclick="startWith('compare')">⚖️ Compare Both</button>
+  </div>
+</div>
+<script>
+const cv=document.getElementById('mc'), cx=cv.getContext('2d');
+let W,H;
+function rsz(){const w=document.getElementById('mw');W=cv.width=w.clientWidth;H=cv.height=w.clientHeight;}
+rsz(); window.addEventListener('resize',()=>{rsz();render();});
+
+// Equirectangular projection with good fit
+const PL=0.06,PR=0.04,PT=0.08,PB=0.1;
+function p(lon,lat){return{x:(lon+180)/360*W*(1-PL-PR)+W*PL,y:(90-lat)/180*H*(1-PT-PB)+H*PT};}
+
+// Simplified land polygons
+const LAND=[
+  {c:'#162236',pts:[[-168,71],[-140,60],[-130,55],[-124,49],[-97,49],[-83,46],[-76,44],[-67,46],[-60,47],[-56,51],[-58,55],[-62,59],[-68,62],[-78,63],[-86,64],[-93,60],[-97,61],[-112,59],[-127,51],[-130,55],[-140,59],[-148,60],[-153,59],[-160,60],[-165,62],[-168,63]]},
+  {c:'#1c3554',pts:[[-124,48],[-104,49],[-97,49],[-83,46],[-76,44],[-68,44],[-70,42],[-74,38],[-76,34],[-80,25],[-87,30],[-90,29],[-97,26],[-97,28],[-100,32],[-104,29],[-111,31],[-117,32],[-118,34],[-121,37],[-122,38],[-124,42]]},// US
+  {c:'#162236',pts:[[-117,32],[-111,31],[-104,29],[-97,28],[-97,26],[-90,21],[-87,16],[-83,10],[-78,8],[-83,9],[-87,13],[-92,18],[-97,22],[-103,20],[-105,22],[-109,24],[-114,28],[-118,30]]},
+  {c:'#162236',pts:[[-80,8],[-75,5],[-52,5],[-35,-5],[-38,-15],[-40,-22],[-44,-24],[-52,-33],[-58,-38],[-65,-42],[-68,-47],[-68,-52],[-65,-55],[-72,-50],[-75,-45],[-72,-40],[-70,-35],[-70,-28],[-72,-25],[-70,-18],[-75,-10],[-78,-3],[-80,1]]},
+  {c:'#162236',pts:[[-9,36],[0,36],[5,43],[10,44],[15,44],[20,40],[26,38],[28,38],[30,42],[26,45],[20,45],[15,47],[10,54],[5,56],[0,59],[-5,58],[-8,52],[-8,48],[-3,44],[-8,38],[-8,36]]},
+  {c:'#162236',pts:[[-17,15],[-10,8],[0,5],[10,5],[20,5],[30,3],[38,10],[42,12],[44,10],[44,2],[40,-3],[35,-10],[35,-15],[32,-25],[28,-33],[20,-36],[18,-34],[16,-29],[10,-12],[8,-3],[5,5],[0,5],[-5,5],[-8,5],[-15,10]]},
+  {c:'#162236',pts:[[26,38],[30,38],[36,37],[40,36],[45,38],[50,40],[55,42],[60,44],[65,42],[70,38],[72,34],[76,34],[80,32],[88,26],[92,22],[98,20],[100,5],[104,2],[106,4],[110,20],[120,22],[126,25],[130,32],[140,37],[142,42],[140,46],[136,48],[130,48],[125,50],[120,50],[114,44],[110,42],[100,42],[94,48],[85,50],[80,54],[74,55],[60,54],[54,52],[50,48],[45,43],[40,40],[36,38],[30,38]]},
+  {c:'#1c3554',pts:[[66,24],[72,22],[76,22],[80,18],[80,14],[78,10],[76,8],[78,8],[80,14],[82,16],[85,20],[88,22],[90,24],[88,26],[84,28],[80,28],[76,30],[72,28],[68,26]]},// India
+  {c:'#162236',pts:[[114,-22],[118,-20],[122,-18],[128,-14],[132,-12],[136,-14],[140,-16],[144,-18],[148,-20],[152,-24],[154,-28],[152,-32],[148,-36],[144,-38],[140,-36],[136,-35],[132,-32],[128,-32],[124,-28],[120,-26]]},
+  {c:'#162236',pts:[[-44,83],[-25,83],[-18,77],[-18,72],[-24,70],[-30,68],[-38,65],[-44,62],[-48,60],[-52,64],[-58,68],[-62,72],[-50,78]]},
+  {c:'#162236',pts:[[130,31],[132,33],[134,35],[136,36],[138,38],[140,40],[142,42],[144,44],[142,44],[140,42],[138,40],[136,38],[132,36],[130,33]]},
+  {c:'#162236',pts:[[96,5],[100,2],[104,-2],[106,-6],[110,-8],[115,-8],[115,-5],[120,-2],[128,-4],[130,-2],[128,0],[122,0],[116,2],[110,4],[106,4],[100,2]]},
+];
+
+const LOC={
+  farm:  {lon:-112,lat:33.5,lbl:'Arizona Farm, USA',  em:'🌾',col:'#FFC04D'},
+  yuma:  {lon:-114,lat:32.5,lbl:'Yuma, AZ — Eco-Spun',em:'🏭',col:'#4CAF50'},
+  la:    {lon:-118,lat:34.1,lbl:'Los Angeles, CA',     em:'👔',col:'#4CAF50'},
+  pac1:  {lon:-165,lat:20,  lbl:'Pacific Ocean',       em:'🌊',col:'#2196F3'},
+  india: {lon:72,  lat:19,  lbl:'Mumbai, India',       em:'🏭',col:'#FF9800'},
+  pac2:  {lon:160, lat:28,  lbl:'Pacific (Return)',    em:'🌊',col:'#2196F3'},
+  brand: {lon:-87, lat:41.8,lbl:'US Textile Market',  em:'👔',col:'#81C784'},
+};
+
+const IND=[
+  {fr:'farm', to:'farm', lbl:'US Pima Cotton Farm',    ic:'🌾',cost:1.65,cum:1.65,t:'b',col:'#FFC04D',dsc:'Premium Pima fiber at commodity price',cv:-0.08},
+  {fr:'farm', to:'pac1', lbl:'Ocean Freight — India',  ic:'🚢',cost:0.40,cum:2.05,t:'a',col:'#2196F3',dsc:'8,000 miles · 3 weeks at sea',cv:0.2},
+  {fr:'pac1', to:'india',lbl:'Spinning in India',      ic:'🏭',cost:0.70,cum:2.75,t:'a',col:'#FF9800',dsc:'30/1 ring-spun · value stays in India',cv:0.1},
+  {fr:'india',to:'pac2', lbl:'Return Freight + Fees',  ic:'✈️',cost:0.95,cum:3.70,t:'a',col:'#BF0A30',dsc:'$0.40 ship + $0.20 royalty + $0.35 misc',cv:-0.18},
+  {fr:'pac2', to:'brand',lbl:'US Brand Buys Back',     ic:'💸',cost:0.80,cum:4.50,t:'a',col:'#BF0A30',dsc:'Tariff + importer margin · TOTAL: $4.50/lb',cv:0.14},
+];
+const USA=[
+  {fr:'farm', to:'farm', lbl:'US Pima Cotton Farm',    ic:'🌾',cost:1.65,cum:1.65,t:'b',col:'#FFC04D',dsc:'Same great Pima fiber',cv:0},
+  {fr:'farm', to:'yuma', lbl:'Truck to Yuma, AZ',      ic:'🚛',cost:0.15,cum:1.80,t:'s',col:'#4CAF50',dsc:'I-8 highway · 169 miles · 0 ocean miles',cv:-0.35},
+  {fr:'yuma', to:'yuma', lbl:'Ring-Spun in Yuma, AZ',  ic:'⚙️',cost:0.85,cum:2.65,t:'s',col:'#4CAF50',dsc:'First western US spinning plant · 200+ jobs',cv:0},
+  {fr:'yuma', to:'la',   lbl:'Delivery to Los Angeles',ic:'🚛',cost:0.35,cum:3.00,t:'s',col:'#4CAF50',dsc:'I-8/Union Pacific · 269 miles · TOTAL: $3.00/lb',cv:-0.3},
+];
+
+// State
+let mode='india', playing=false, animT=0, spd=1.5, raf=null, lts=null;
+let route=IND, logged=[], ptcl=[], pt=0, cmpMode=false;
+
+function go(m){
+  ['india','usa','compare'].forEach((k,i)=>{
+    const b=document.getElementById('b-'+['india','usa','cmp'][i]);
+    b.classList.remove('on','g');
+    if(k===m){b.classList.add('on');if(k==='usa') b.classList.add('g');}
+  });
+  cmpMode=(m==='compare');
+  document.getElementById('cmp').style.display=cmpMode?'block':'none';
+  route=m==='usa'?USA:IND;
+  mode=m==='compare'?'india':m;
+  buildDots();
+  restart();
+}
+
+function startWith(m){ document.getElementById('intro').style.display='none'; go(m); togglePlay(); }
+
+function restart(){
+  playing=false;animT=0;lts=null;logged=[];ptcl=[];
+  document.getElementById('log').innerHTML='';
+  document.getElementById('pb').style.width='0%';
+  document.getElementById('pbtn').textContent='▶  Play';
+  document.getElementById('tp').textContent='$1.65';
+  document.getElementById('ts').textContent='US Cotton Farm — Starting Price';
+  document.getElementById('tp').style.color='#FFC04D';
+  if(raf){cancelAnimationFrame(raf);raf=null;}
+  render();
+}
+
+function togglePlay(){
+  playing=!playing;
+  document.getElementById('pbtn').textContent=playing?'⏸  Pause':'▶  Play';
+  if(playing&&!raf){lts=null;raf=requestAnimationFrame(loop);}
+}
+function setSpd(v){spd=parseFloat(v);document.getElementById('sl').textContent=v+'×';}
+function seekClick(e){
+  const r=document.getElementById('pbw').getBoundingClientRect();
+  animT=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+  document.getElementById('pb').style.width=(animT*100)+'%';
+  render();tick();
+}
+
+function loop(ts){
+  raf=null;if(!playing)return;
+  const dt=lts?(ts-lts)/1000:0;lts=ts;
+  const tot=route.length*2.8;
+  animT=Math.min(animT+dt*spd/tot,1);
+  document.getElementById('pb').style.width=(animT*100)+'%';
+  pt+=dt*2;
+  updPtcl(dt);tick();chkLog();updDots();
+  render();
+  if(animT>=1){playing=false;document.getElementById('pbtn').textContent='▶  Play';return;}
+  raf=requestAnimationFrame(loop);
+}
+
+function st(i){const n=route.length;return Math.max(0,Math.min(1,(animT-i/n)/(1/n)));}
+
+function tick(){
+  const n=route.length;let cost=0,lbl='US Cotton Farm';
+  for(let i=0;i<n;i++){
+    const t=st(i);if(t<=0)continue;
+    const prev=i>0?route[i-1].cum:route[0].cum;
+    cost=i===0?route[0].cum*Math.min(t*4,1):prev+(route[i].cum-prev)*Math.min(t*2,1);
+    lbl=route[i].lbl;
+  }
+  const el=document.getElementById('tp');
+  el.textContent='$'+Math.max(0,cost).toFixed(2);
+  document.getElementById('ts').textContent=lbl;
+  const pct=cost/4.5;
+  el.style.color=route===USA?'#81C784':pct>0.7?'#ff6b6b':pct>0.4?'#FFA040':'#FFC04D';
+}
+
+function chkLog(){
+  route.forEach((s,i)=>{
+    if(!logged.includes(i)&&st(i)>0.08){
+      logged.push(i);
+      addLog(s,i);
+      if(s.fr!==s.to) burst(i);
+    }
+  });
+}
+function addLog(s){
+  const l=document.getElementById('log'),d=document.createElement('div');
+  d.className='le'+(route===USA?' g':'');
+  const cls=s.t==='b'?'b':s.t==='s'?'s':'a';
+  const cv=s.t==='b'?'$'+s.cost.toFixed(2)+'/lb':s.t==='s'?'+$'+s.cost.toFixed(2)+' ✓':'+$'+s.cost.toFixed(2);
+  d.innerHTML=`<div class="le-top"><span class="le-n">${s.ic} ${s.lbl}</span><span class="le-c ${cls}">${cv}</span></div><div class="le-d">${s.dsc} · Total: $${s.cum.toFixed(2)}/lb</div>`;
+  l.appendChild(d);
+  while(l.children.length>5)l.removeChild(l.firstChild);
+}
+
+// Particles
+function burst(i){
+  const s=route[i],loc=LOC[s.to]||LOC[s.fr],{x,y}=p(loc.lon,loc.lat);
+  for(let j=0;j<18;j++){const a=Math.random()*Math.PI*2,v=45+Math.random()*65;ptcl.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,dc:0.016+Math.random()*0.022,sz:2+Math.random()*3.5,c:s.col});}
+}
+function updPtcl(dt){ptcl=ptcl.filter(p=>p.life>0);ptcl.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=0.91;p.vy*=0.91;p.life-=p.dc;});}
+
+// Step dots
+function buildDots(){
+  const el=document.getElementById('sdots');el.innerHTML='';
+  route.forEach((_,i)=>{const d=document.createElement('div');d.className='sd'+(route===USA?' gd':'');d.id='sd'+i;el.appendChild(d);});
+}
+function updDots(){
+  route.forEach((_,i)=>{
+    const d=document.getElementById('sd'+i);if(!d)return;
+    const t=st(i),g=route===USA?' gd':'';
+    d.className='sd'+g+(t>=1?' done':t>0?' act':'');
+  });
+}
+
+// Bezier helpers
+function bcp(a,b,cv){const dist=Math.hypot(b.x-a.x,b.y-a.y);return{x:(a.x+b.x)/2,y:(a.y+b.y)/2+cv*dist};}
+function bpt(a,cp,b,t){return{x:(1-t)*(1-t)*a.x+2*(1-t)*t*cp.x+t*t*b.x,y:(1-t)*(1-t)*a.y+2*(1-t)*t*cp.y+t*t*b.y};}
+
+// RENDER
+function render(){
+  // Ocean
+  const grad=cx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'#0a1628');grad.addColorStop(1,'#060f1e');
+  cx.fillStyle=grad;cx.fillRect(0,0,W,H);
+
+  // Grid
+  cx.strokeStyle='rgba(255,255,255,0.02)';cx.lineWidth=0.5;
+  for(let ln=-180;ln<=180;ln+=30){const{x:x1,y:y1}=p(ln,90),{x:x2,y:y2}=p(ln,-90);cx.beginPath();cx.moveTo(x1,y1);cx.lineTo(x2,y2);cx.stroke();}
+  for(let lt=-90;lt<=90;lt+=30){const{x:x1,y:y1}=p(-180,lt),{x:x2,y:y2}=p(180,lt);cx.beginPath();cx.moveTo(x1,y1);cx.lineTo(x2,y2);cx.stroke();}
+
+  // Land
+  LAND.forEach(l=>{
+    cx.beginPath();
+    l.pts.forEach(([ln,lt],i)=>{const{x,y}=p(ln,lt);i===0?cx.moveTo(x,y):cx.lineTo(x,y);});
+    cx.closePath();cx.fillStyle=l.c;cx.fill();
+    cx.strokeStyle='rgba(255,255,255,0.05)';cx.lineWidth=0.6;cx.stroke();
+  });
+
+  // Ghost paths (full route, very faint)
+  if(cmpMode){
+    drawGhost(IND,'#BF0A30');drawGhost(USA,'#4CAF50');
+    drawAnimated(IND);drawAnimated(USA);
+    drawLocs(IND);drawLocs(USA);
+  } else {
+    drawGhost(route,route===USA?'#4CAF50':'#BF0A30');
+    drawAnimated(route);
+    drawLocs(route);
+  }
+
+  // Particles
+  ptcl.forEach(q=>{
+    cx.save();cx.globalAlpha=q.life;cx.beginPath();cx.arc(q.x,q.y,q.sz,0,Math.PI*2);
+    cx.fillStyle=q.c;cx.shadowColor=q.c;cx.shadowBlur=10;cx.fill();cx.restore();
+  });
+
+  // Bottom label
+  cx.save();cx.font='bold 11px "DM Sans",sans-serif';cx.fillStyle='rgba(255,255,255,0.18)';cx.textAlign='right';
+  cx.fillText(route===USA?'🇺🇸 Yuma Route — $3.00/lb':'🇮🇳 India Route — $4.50/lb',W-16,H-16);cx.restore();
+}
+
+function drawGhost(r,col){
+  cx.save();cx.globalAlpha=0.18;cx.setLineDash([4,7]);cx.strokeStyle=col;cx.lineWidth=1.5;
+  r.forEach(s=>{
+    if(s.fr===s.to)return;
+    const a=p(LOC[s.fr].lon,LOC[s.fr].lat),b=p(LOC[s.to].lon,LOC[s.to].lat),cp=bcp(a,b,s.cv);
+    cx.beginPath();cx.moveTo(a.x,a.y);cx.quadraticCurveTo(cp.x,cp.y,b.x,b.y);cx.stroke();
+  });
+  cx.setLineDash([]);cx.restore();
+}
+
+function drawAnimated(r){
+  const n=r.length;
+  r.forEach((s,i)=>{
+    const t=st(i);if(t<=0)return;
+    const fl=LOC[s.fr],tl=LOC[s.to],a=p(fl.lon,fl.lat),b=p(tl.lon,tl.lat);
+
+    if(s.fr!==s.to){
+      const cp=bcp(a,b,s.cv),dt=Math.min(t,1);
+      // glow path
+      cx.save();cx.shadowColor=s.col;cx.shadowBlur=14;cx.strokeStyle=s.col;cx.lineWidth=3;
+      cx.beginPath();cx.moveTo(a.x,a.y);
+      for(let j=1;j<=60*dt;j++){const{x,y}=bpt(a,cp,b,j/60);cx.lineTo(x,y);}
+      cx.stroke();cx.restore();
+      // moving icon
+      if(t>0&&t<1.05){
+        const vt=Math.min(t,1),pos=bpt(a,cp,b,vt);
+        drawIcon(pos.x,pos.y,s.ic,s.col);
+      }
+    } else {
+      // spin animation
+      if(t>0&&t<1){spinAnim(a.x,a.y,t,s.col);drawIcon(a.x,a.y,s.ic,s.col);}
+    }
+  });
+}
+
+function drawIcon(x,y,em,col){
+  const sz=22;
+  cx.save();cx.shadowColor=col;cx.shadowBlur=22;
+  cx.beginPath();cx.arc(x,y,sz*0.58,0,Math.PI*2);cx.fillStyle=col+'55';cx.fill();cx.restore();
+  cx.beginPath();cx.arc(x,y,sz*0.58,0,Math.PI*2);cx.fillStyle=col+'dd';cx.fill();
+  cx.strokeStyle='rgba(255,255,255,0.6)';cx.lineWidth=1.5;cx.stroke();
+  // pulse
+  const pk=(Math.sin(pt*3)+1)/2;
+  cx.beginPath();cx.arc(x,y,sz*0.58+4+pk*6,0,Math.PI*2);cx.strokeStyle=col+'44';cx.lineWidth=1.5;cx.stroke();
+  cx.font=`${sz*0.72}px serif`;cx.textAlign='center';cx.textBaseline='middle';cx.fillText(em,x,y+1);
+}
+
+function spinAnim(x,y,t,col){
+  for(let i=0;i<3;i++){
+    cx.save();cx.globalAlpha=0.5-i*0.13;cx.strokeStyle=col;cx.lineWidth=2;cx.shadowColor=col;cx.shadowBlur=8;
+    cx.beginPath();cx.arc(x,y,22+i*10,pt+i*1.2,pt+i*1.2+t*Math.PI*2);cx.stroke();cx.restore();
+  }
+}
+
+function drawLocs(r){
+  const lset=new Set(r.flatMap(s=>[s.fr,s.to]));
+  lset.forEach(k=>{
+    const loc=LOC[k];if(!loc)return;
+    const{x,y}=p(loc.lon,loc.lat);
+    let vis=false,act=false;
+    r.forEach((s,i)=>{const t=st(i);if((s.fr===k||s.to===k)&&t>0){vis=true;if(t<1)act=true;}});
+    const dr=act?8:vis?6:4;
+    cx.save();if(act){cx.shadowColor=loc.col;cx.shadowBlur=18;}
+    cx.beginPath();cx.arc(x,y,dr,0,Math.PI*2);cx.fillStyle=vis?loc.col:'rgba(255,255,255,0.18)';cx.fill();
+    cx.strokeStyle='rgba(255,255,255,0.45)';cx.lineWidth=1.5;cx.stroke();cx.restore();
+    if(vis){
+      cx.save();cx.font='bold 11px "DM Sans",sans-serif';cx.textAlign='center';
+      cx.fillStyle='#fff';cx.shadowColor='rgba(0,0,0,0.95)';cx.shadowBlur=6;
+      const off=loc.lat>25?-16:16;
+      cx.fillText(loc.em+' '+loc.lbl,x,y+off);cx.restore();
+    }
+  });
+}
+
+buildDots();render();
+</script>
+</body>
+</html>

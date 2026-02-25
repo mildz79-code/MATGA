@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H.R.7230 — Buying American Cotton Act of 2026 | MATGA Policy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #BF0A30;
+  --red-dk: #8B0020;
+  --blue:   #002868;
+  --blue-md:#1a3d7c;
+  --gold:   #C8941A;
+  --cream:  #FAF8F3;
+  --paper:  #F4F1EB;
+  --rule:   #DDD8CE;
+  --ink:    #0F1923;
+  --slate:  #5E6E82;
+  --green:  #1B6B2F;
+  --green-lt:#E8F5EB;
+  --white:  #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);}
+
+/* ── STICKY NAV ── */
+#sitenav{
+  background:var(--white);border-bottom:1px solid var(--rule);
+  padding:0 60px;display:flex;align-items:center;justify-content:space-between;
+  height:52px;position:sticky;top:0;z-index:300;
+}
+.sn-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--blue);letter-spacing:.05em;text-decoration:none;}
+.sn-logo span{color:var(--red);}
+.sn-links{display:flex;gap:0;}
+.sn-link{padding:0 16px;height:52px;display:flex;align-items:center;font-size:.67rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--slate);text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;}
+.sn-link:hover{color:var(--ink);}
+.sn-link.cur{color:var(--red);border-bottom-color:var(--red);}
+.sn-act{background:var(--red);color:var(--white)!important;padding:7px 18px!important;border-radius:100px;height:auto!important;border-bottom:none!important;margin-left:8px;}
+.sn-act:hover{background:var(--red-dk)!important;}
+
+/* ── BILL HERO ── */
+#hero{
+  background:var(--blue);
+  position:relative;overflow:hidden;
+  padding:52px 60px 48px;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 56px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 56px);
+  pointer-events:none;
+}
+/* Big watermark number */
+.hero-wm{
+  position:absolute;right:40px;top:50%;transform:translateY(-50%);
+  font-family:'Bebas Neue',sans-serif;font-size:18rem;line-height:1;
+  color:rgba(255,255,255,.04);letter-spacing:-.02em;pointer-events:none;
+  white-space:nowrap;
+}
+.hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:2;}
+
+.bill-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--red);color:var(--white);
+  font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;letter-spacing:.1em;
+  padding:6px 16px;border-radius:3px;margin-bottom:18px;
+}
+.bill-badge .pulse{width:7px;height:7px;background:#FFC04D;border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+.hero-eyebrow{
+  font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:12px;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.6rem,5.5vw,4.6rem);
+  color:var(--white);line-height:.92;letter-spacing:.02em;margin-bottom:22px;
+}
+.hero-title .acc{color:#FFC04D;}
+
+.hero-meta-row{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:28px;}
+.hm{border-left:2px solid rgba(255,255,255,.12);padding-left:14px;}
+.hm-l{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
+.hm-v{font-size:.88rem;color:rgba(255,255,255,.85);font-weight:600;}
+
+/* Legislative tracker */
+.leg-track{
+  display:flex;align-items:stretch;gap:0;
+  background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);
+  border-radius:6px;overflow:hidden;width:100%;
+}
+.lt-step{
+  flex:1;padding:12px 14px;text-align:center;
+  font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);transition:all .2s;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+}
+.lt-step+.lt-step{border-left:1px solid rgba(255,255,255,.07);}
+.lt-step .lt-num{font-family:'DM Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.2);}
+.lt-step.done{background:rgba(46,125,50,.2);color:#81C784;}
+.lt-step.done .lt-num{color:rgba(129,199,132,.5);}
+.lt-step.now{background:rgba(200,148,26,.22);color:#FFC04D;}
+.lt-step.now .lt-num{color:rgba(255,192,77,.6);}
+
+/* ── MAIN WRAPPER ── */
+#wrap{max-width:1080px;margin:0 auto;padding:0 60px 80px;}
+
+/* ── IMPACT NUMBERS ── */
+.impact-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:40px;
+}
+.ic{background:var(--white);padding:26px 22px;text-align:center;}
+.ic-n{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:1;margin-bottom:7px;}
+.ic-n.gold{color:var(--gold);}
+.ic-n.green{color:var(--green);}
+.ic-n.red{color:var(--red);}
+.ic-n.blue{color:var(--blue);}
+.ic-l{font-size:.77rem;color:var(--slate);line-height:1.5;}
+
+/* ── SECTION HEADER ── */
+.sh{display:flex;align-items:center;gap:14px;padding:44px 0 22px;border-top:2px solid var(--ink);margin-top:44px;}
+.sh:first-of-type{border-top:none;margin-top:0;padding-top:40px;}
+.sh-tag{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--red);background:rgba(191,10,48,.07);border:1px solid rgba(191,10,48,.18);padding:3px 10px;border-radius:3px;flex-shrink:0;}
+.sh-title{font-family:'Bebas Neue',sans-serif;font-size:1.65rem;color:var(--ink);letter-spacing:.03em;}
+.sh-rule{flex:1;height:1px;background:var(--rule);}
+
+/* ── BILL SUMMARY CARD ── */
+.summary-split{
+  display:grid;grid-template-columns:1fr 300px;
+  gap:0;border:1px solid var(--rule);
+}
+.ss-body{padding:36px 36px 32px;background:var(--white);}
+.ss-lede{
+  font-family:'Lora',serif;font-size:1.06rem;line-height:1.82;color:var(--ink);
+  margin-bottom:22px;
+}
+.ss-lede strong{color:var(--red);}
+.ss-body p{font-size:.9rem;line-height:1.82;color:#374151;margin-bottom:14px;}
+.ss-body p:last-child{margin-bottom:0;}
+.ss-aside{background:var(--blue);padding:30px 24px;display:flex;flex-direction:column;gap:18px;}
+.sa{border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:18px;}
+.sa:last-child{border:none;padding:0;}
+.sa-l{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px;}
+.sa-v{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:#FFC04D;line-height:1.2;}
+.sa-s{font-size:.7rem;color:rgba(255,255,255,.45);margin-top:4px;line-height:1.5;}
+
+/* ── PROVISIONS GRID ── */
+.prov-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--rule);
+  border:1px solid var(--rule);
+}
+.prov{background:var(--white);padding:26px 28px;}
+.prov-icon{font-size:1.8rem;margin-bottom:12px;display:block;}
+.prov-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--blue);margin-bottom:10px;letter-spacing:.03em;}
+.prov-body{font-size:.84rem;line-height:1.75;color:#374151;}
+.prov-body strong{color:var(--ink);}
+.chip{display:inline-block;background:rgba(200,148,26,.1);border:1px solid rgba(200,148,26,.25);border-radius:3px;padding:1px 8px;font-family:'DM Mono',monospace;font-size:.78rem;color:var(--gold);}
+.chip.green{background:rgba(27,107,47,.08);border-color:rgba(27,107,47,.25);color:var(--green);}
+.chip.blue{background:rgba(0,40,104,.08);border-color:rgba(0,40,104,.2);color:var(--blue);}
+.chip.red{background:rgba(191,10,48,.08);border-color:rgba(191,10,48,.2);color:var(--red);}
+
+/* ── MULTIPLIER TABLE ── */
+.mult-table{width:100%;border-collapse:collapse;border:1px solid var(--rule);background:var(--white);}
+.mult-table th{
+  background:var(--ink);color:var(--white);
+  font-size:.63rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:14px 18px;text-align:left;
+}
+.mult-table td{padding:15px 18px;border-bottom:1px solid var(--rule);font-size:.86rem;vertical-align:top;line-height:1.55;}
+.mult-table tr:last-child td{border-bottom:none;}
+.mult-table tr:hover td{background:var(--cream);}
+.mult-table td strong{color:var(--ink);}
+.mbadge{
+  font-family:'Bebas Neue',sans-serif;font-size:1.25rem;
+  padding:3px 12px;border-radius:3px;display:inline-block;white-space:nowrap;
+}
+.mbadge.a{background:rgba(94,110,130,.1);color:var(--slate);}
+.mbadge.b{background:rgba(200,148,26,.12);color:var(--gold);}
+.mbadge.c{background:rgba(27,107,47,.1);color:var(--green);}
+.mbadge.d{background:rgba(0,40,104,.1);color:var(--blue);}
+.matga-row td{background:rgba(200,148,26,.05);}
+.matga-row td:first-child{border-left:3px solid var(--gold);}
+
+/* ── CREDIT CALCULATOR ── */
+.calc-wrap{background:var(--white);border:1px solid var(--rule);padding:34px 36px;}
+.calc-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--blue);margin-bottom:5px;}
+.calc-sub{font-size:.82rem;color:var(--slate);margin-bottom:28px;}
+.calc-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:22px;}
+.cf label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--slate);margin-bottom:7px;}
+.cf input,.cf select{
+  width:100%;padding:10px 13px;
+  border:1px solid var(--rule);border-radius:4px;
+  font-size:.9rem;font-family:'DM Mono',monospace;
+  background:var(--cream);color:var(--ink);outline:none;
+  transition:border-color .2s;
+}
+.cf input:focus,.cf select:focus{border-color:var(--blue);}
+.calc-go{
+  padding:12px 28px;background:var(--blue);color:var(--white);
+  border:none;border-radius:4px;font-size:.75rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;
+}
+.calc-go:hover{background:var(--blue-md);}
+.calc-out{
+  display:none;margin-top:22px;
+  background:linear-gradient(135deg,var(--blue) 0%,#001545 100%);
+  border-radius:6px;overflow:hidden;
+}
+.calc-out.show{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);}
+.co-cell{background:rgba(0,0,0,.28);padding:20px 22px;}
+.co-l{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:6px;}
+.co-v{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#81C784;line-height:1;}
+.co-s{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:4px;}
+
+/* ── MATGA IMPACT BOX ── */
+.impact-box{
+  background:linear-gradient(140deg,#0A2010 0%,#0e2e12 55%,#071809 100%);
+  border-radius:4px;padding:42px 46px;color:var(--white);
+  position:relative;overflow:hidden;
+}
+.impact-box::after{
+  content:'§45BB';position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-family:'Bebas Neue',sans-serif;font-size:13rem;line-height:1;
+  color:rgba(255,255,255,.04);pointer-events:none;letter-spacing:-.02em;
+}
+.ib-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(76,175,80,.18);border:1px solid rgba(76,175,80,.3);
+  border-radius:100px;padding:5px 14px;
+  font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#81C784;margin-bottom:18px;
+}
+.ib-h{font-family:'Bebas Neue',sans-serif;font-size:2.1rem;color:var(--white);margin-bottom:14px;line-height:1.05;}
+.ib-h span{color:#FFC04D;}
+.ib-p{font-family:'Lora',serif;font-style:italic;font-size:.96rem;line-height:1.8;color:rgba(255,255,255,.65);margin-bottom:26px;max-width:700px;}
+.ib-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:2;}
+.ib-cell{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:5px;padding:18px 20px;}
+.ib-cell-n{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:#FFC04D;line-height:1;margin-bottom:5px;}
+.ib-cell-l{font-size:.73rem;color:rgba(255,255,255,.52);line-height:1.45;}
+
+/* ── COSPONSORS ── */
+.cosponsor-card{background:var(--white);border:1px solid var(--rule);padding:28px 32px;}
+.cos-h{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--blue);margin-bottom:16px;letter-spacing:.03em;}
+.cos-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.cos-tag{
+  padding:5px 12px;border-radius:100px;font-size:.67rem;font-weight:700;
+  background:var(--paper);border:1px solid var(--rule);color:var(--slate);
+  transition:all .2s;cursor:default;
+}
+.cos-tag:hover{background:rgba(0,40,104,.05);color:var(--blue);border-color:rgba(0,40,104,.18);}
+.cos-tag.lead{background:rgba(191,10,48,.07);border-color:rgba(191,10,48,.22);color:var(--red);}
+.cos-tag.dem{background:rgba(0,40,104,.06);border-color:rgba(0,40,104,.18);color:var(--blue);}
+.cos-note{font-size:.7rem;color:var(--slate);margin-top:14px;font-style:italic;line-height:1.6;}
+
+/* ── PULLQUOTE ── */
+.pullquote{
+  border-left:5px solid var(--gold);
+  background:var(--blue);padding:32px 36px;
+  margin:1px 0;
+}
+.pq-text{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:1.18rem;line-height:1.78;color:var(--white);margin-bottom:14px;
+}
+.pq-src{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.pq-src span{color:rgba(255,255,255,.65);}
+
+/* ── CTA ── */
+.cta-block{
+  background:var(--red);border-radius:4px;
+  padding:46px 50px;text-align:center;position:relative;overflow:hidden;
+}
+.cta-block::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,rgba(0,0,0,.04) 0,rgba(0,0,0,.04) 1px,transparent 1px,transparent 16px);
+  pointer-events:none;
+}
+.cta-h{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--white);margin-bottom:12px;position:relative;line-height:1;}
+.cta-p{font-family:'Lora',serif;font-style:italic;font-size:.98rem;color:rgba(255,255,255,.78);margin-bottom:26px;position:relative;line-height:1.7;}
+.cta-btns{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;position:relative;}
+.btn-w{background:var(--white);color:var(--red);padding:13px 28px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:transform .2s;display:inline-block;}
+.btn-w:hover{transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--white);padding:13px 28px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:2px solid rgba(255,255,255,.38);transition:all .2s;display:inline-block;}
+.btn-ghost:hover{border-color:var(--white);transform:translateY(-2px);}
+
+/* ── FOOTER ── */
+footer{background:#080E1A;color:rgba(255,255,255,.38);padding:28px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(255,255,255,.55);}
+.ft-logo span{color:var(--red);}
+.ft-copy{font-size:.7rem;}
+.ft-links{display:flex;gap:18px;}
+.ft-links a{font-size:.7rem;color:rgba(255,255,255,.32);text-decoration:none;transition:color .2s;}
+.ft-links a:hover{color:rgba(255,255,255,.68);}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;}
+.rv.in{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  #sitenav,#hero,#wrap,footer{padding-left:22px;padding-right:22px;}
+  .summary-split{grid-template-columns:1fr;}
+  .ss-aside{flex-direction:row;flex-wrap:wrap;gap:16px;}
+  .prov-grid,.ib-grid{grid-template-columns:1fr;}
+  .calc-fields{grid-template-columns:1fr;}
+  .impact-row{grid-template-columns:1fr 1fr;}
+  .leg-track{flex-wrap:wrap;}
+  .cta-block{padding:32px 24px;}
+}
+@media(max-width:540px){
+  .hero-title{font-size:2.4rem;}
+  .impact-row,.ib-grid{grid-template-columns:1fr;}
+  .calc-out.show{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav id="sitenav">
+  <a href="matga-final.html" class="sn-logo">M.A.T.G.A <span>🌾</span></a>
+  <div class="sn-links">
+    <a href="matga-final.html" class="sn-link">Home</a>
+    <a href="matga-newsroom.html" class="sn-link">Newsroom</a>
+    <a href="#" class="sn-link cur">Policy</a>
+    <a href="cotton-journey-map.html" class="sn-link">Journey Map</a>
+    <a href="matga-final.html#cta" class="sn-link sn-act">Support Initiative</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="hero">
+  <div class="hero-wm">45BB</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">119th Congress · 2nd Session · H.R.7230 · January 22, 2026</div>
+    <div class="bill-badge"><div class="pulse"></div> Active · Referred to House Ways &amp; Means</div>
+    <h1 class="hero-title">Buying <span class="acc">American</span><br>Cotton <span class="acc">Act</span> of 2026</h1>
+    <p style="font-family:'Lora',serif;font-style:italic;font-size:1rem;color:rgba(255,255,255,.6);max-width:580px;line-height:1.75;margin-bottom:26px;">
+      A bill to amend the Internal Revenue Code of 1986 to establish a <em>domestic cotton consumption credit</em> — rewarding every stage of American cotton processing with escalating federal tax incentives.
+    </p>
+    <div class="hero-meta-row">
+      <div class="hm"><div class="hm-l">Sponsor</div><div class="hm-v">Rep. Gregory F. Murphy [R-NC-3]</div></div>
+      <div class="hm"><div class="hm-l">Introduced</div><div class="hm-v">January 22, 2026</div></div>
+      <div class="hm"><div class="hm-l">Committee</div><div class="hm-v">House Ways &amp; Means</div></div>
+      <div class="hm"><div class="hm-l">Cosponsors</div><div class="hm-v">43 Bipartisan</div></div>
+      <div class="hm"><div class="hm-l">IRC Section</div><div class="hm-v">§ 45BB — New Credit</div></div>
+      <div class="hm"><div class="hm-l">Policy Area</div><div class="hm-v">Taxation</div></div>
+    </div>
+    <div class="leg-track">
+      <div class="lt-step done"><div class="lt-num">01</div>Introduced</div>
+      <div class="lt-step now"><div class="lt-num">02</div>In Committee</div>
+      <div class="lt-step"><div class="lt-num">03</div>Passed House</div>
+      <div class="lt-step"><div class="lt-num">04</div>Passed Senate</div>
+      <div class="lt-step"><div class="lt-num">05</div>Became Law</div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div id="wrap">
+
+  <!-- KEY NUMBERS -->
+  <div class="impact-row rv">
+    <div class="ic">
+      <div class="ic-n gold">§ 45BB</div>
+      <div class="ic-l">New IRC section creating the Domestic Cotton Consumption Credit</div>
+    </div>
+    <div class="ic">
+      <div class="ic-n green">1.6×</div>
+      <div class="ic-l">Credit multiplier for products made with <strong>US-spun yarn</strong> — MATGA's core output</div>
+    </div>
+    <div class="ic">
+      <div class="ic-n blue">6.5×</div>
+      <div class="ic-l">Credit multiplier for products made with <strong>US-made fabric</strong> — full domestic chain</div>
+    </div>
+    <div class="ic">
+      <div class="ic-n red">43</div>
+      <div class="ic-l">Bipartisan House cosponsors from cotton-growing &amp; textile manufacturing states</div>
+    </div>
+  </div>
+
+  <!-- PLAIN-ENGLISH SUMMARY -->
+  <div class="sh">
+    <div class="sh-tag">§ 1 — Summary</div>
+    <div class="sh-title">What This Bill Does — Plain English</div>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="summary-split rv">
+    <div class="ss-body">
+      <p class="ss-lede">H.R.7230 creates a <strong>brand-new federal tax credit</strong> — § 45BB of the Internal Revenue Code — that pays manufacturers a percentage of the cotton market price for every pound of US-grown cotton in their finished products, with <strong>dramatically larger credits at every additional stage of domestic processing.</strong></p>
+      <p>The credit is calculated as: <strong>(pounds of US cotton) × (applicable percentage) × (cotton market price).</strong> The "applicable percentage" is either 24% — if all processing happened in the US or in a country with a US free trade agreement — or 18% if any stage of processing happened in a non-FTA country (like India, China, Bangladesh, or Vietnam).</p>
+      <p>On top of the base credit, the bill creates <strong>two election-based multipliers</strong> for further domestic processing. If the finished product contains yarn that was <em>spun in the United States</em> from US cotton, the taxpayer can elect to apply a <strong>1.6× multiplier</strong>. If the product contains fabric that was <em>woven or knitted in the United States</em>, the taxpayer can elect a <strong>6.5× multiplier</strong>. These elections are applied separately, meaning a fully domestic chain can stack them.</p>
+      <p>The credit is fully <strong>transferable under IRC § 6418</strong> — meaning manufacturers who don't have enough tax liability to use the full credit can sell it on the open market, exactly like solar or clean energy credits. This creates a private capital mechanism to help finance new domestic textile facilities.</p>
+      <p>To qualify, every bale of cotton must carry a <strong>USDA-assigned permanent bale identification number</strong> and be digitally traced through the entire supply chain from US farm to final retail sale. This creates an auditable, IRS-verified chain of custody — turning "Made in USA" from a marketing claim into a documented legal fact.</p>
+    </div>
+    <div class="ss-aside">
+      <div class="sa"><div class="sa-l">Base Credit Rate (Full US / FTA)</div><div class="sa-v">24%</div><div class="sa-s">Of cotton market price × lbs in finished article</div></div>
+      <div class="sa"><div class="sa-l">Base Credit Rate (Non-FTA country)</div><div class="sa-v">18%</div><div class="sa-s">India, China, Bangladesh, Vietnam — lower incentive</div></div>
+      <div class="sa"><div class="sa-l">US-Spun Yarn Multiplier § 45BB(d)(1)</div><div class="sa-v">1.6× Base</div><div class="sa-s">Yuma ring-spun yarn qualifies — effective rate 38.4%</div></div>
+      <div class="sa"><div class="sa-l">US-Made Fabric Multiplier § 45BB(d)(2)</div><div class="sa-v">6.5× Base</div><div class="sa-s">Woven/knitted in US from US yarn — effective 156%</div></div>
+      <div class="sa"><div class="sa-l">Credit Transferability</div><div class="sa-v">§ 6418(f)</div><div class="sa-s">Fully transferable — sellable to third-party investors</div></div>
+      <div class="sa"><div class="sa-l">Cotton Types Covered</div><div class="sa-v">ELS + Upland</div><div class="sa-s">Extra long staple (Pima/Supima, Arizona) + upland</div></div>
+      <div class="sa"><div class="sa-l">Effective Date</div><div class="sa-v">Day of Enactment</div><div class="sa-s">Applies to all eligible articles sold after enactment</div></div>
+    </div>
+  </div>
+
+  <!-- KEY PROVISIONS -->
+  <div class="sh">
+    <div class="sh-tag">§ 2 — Provisions</div>
+    <div class="sh-title">Six Key Provisions Explained</div>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="prov-grid rv">
+    <div class="prov">
+      <span class="prov-icon">🏷️</span>
+      <div class="prov-title">Digital Bale-to-Shelf Tracing</div>
+      <div class="prov-body">Every bale of qualifying cotton must be assigned a <strong>permanent USDA bale identification number</strong> at ginning — an auto-generated ID for cotton grown and ginned in the US. The bill mandates digital tracking of that cotton's "movement and volume" through every stage of the supply chain from US origin to final retail sale. For MATGA: every spool of Yuma-spun yarn carries an IRS-verified provenance trail from the Arizona cotton field. This system, defined in § 45BB(c)(2)(B), also lets the IRS prevent double-claiming.</div>
+    </div>
+    <div class="prov">
+      <span class="prov-icon">💸</span>
+      <div class="prov-title">Transferable Credit — § 6418</div>
+      <div class="prov-body">The bill explicitly adds § 45BB to the list of transferable credits under <strong>IRC § 6418(f)(1)(A)</strong>. This is landmark: a manufacturer with insufficient tax liability can <em>sell their unused credit</em> to investors, just like solar or wind energy credits. For the Eco-Spun Yuma facility: future § 45BB credits generated by customers buying our yarn can be <strong>monetized as private financing</strong> — making the facility's economics even more attractive to investors and underwriters. This turns the tax code into a capital market for domestic cotton manufacturing.</div>
+    </div>
+    <div class="prov">
+      <span class="prov-icon">🌾</span>
+      <div class="prov-title">Arizona Pima Cotton Explicitly Qualifies</div>
+      <div class="prov-body">Under § 45BB(c)(2)(A), "qualified cotton" includes <strong>extra long staple (ELS) cotton</strong> as defined in § 1111 of the Agricultural Act of 2014 — this is the precise statutory definition that covers <em>Pima and Supima cotton</em>, grown exclusively in Arizona, California, and New Mexico. The MATGA supply chain — AZ Pima farmers → Yuma ring-spinning → US brands — is built entirely on ELS cotton. The bill also covers <span class="chip">upland cotton</span> from southern states, giving Yuma access to a broader raw material pool.</div>
+    </div>
+    <div class="prov">
+      <span class="prov-icon">📐</span>
+      <div class="prov-title">Credit Measured in Pounds of Cotton</div>
+      <div class="prov-body">The credit is based on the <strong>actual weight of qualified cotton in the finished article</strong> — not the retail price. "Volume" is defined in § 45BB(c)(7) as "the amount of qualified cotton in such article, as measured in pounds." This structure maximizes value for <em>high-cotton-weight products</em>: military uniforms, workwear, T-shirts, Olympic apparel — exactly MATGA's target markets. A 200-gram cotton tee with <span class="chip">0.44 lbs</span> of certified Pima generates more credit than a lightweight luxury blouse at the same retail price.</div>
+    </div>
+    <div class="prov">
+      <span class="prov-icon">🚫</span>
+      <div class="prov-title">No Double-Counting — Anti-Stacking Rule</div>
+      <div class="prov-body">Section 45BB(c)(1)(B) prevents the same cotton pounds from generating credits at multiple points in the supply chain. Only the <strong>first sale to an unrelated person at the final retail-ready stage</strong> triggers the credit. If a supplier intends to claim the credit, they must <strong>notify downstream buyers</strong> in writing — giving retailers and brands certainty about whether they can claim. Regulations under § 45BB(e)(1) establish a system to prevent the credit being allowed more than once for any amount of qualified cotton.</div>
+    </div>
+    <div class="prov">
+      <span class="prov-icon">🌐</span>
+      <div class="prov-title">FTA vs. Non-FTA — The India Penalty</div>
+      <div class="prov-body">The bill draws a direct line between domestic production incentives and offshore penalties. Any processing stage in a country <strong>without a US free trade agreement</strong> — India, China, Bangladesh, Pakistan — triggers the lower <span class="chip red">18% rate</span> instead of <span class="chip green">24%</span>. Crucially, the <strong>1.6× yarn multiplier</strong> is only available if the yarn was spun in the United States (§ 45BB(d)(1)(B)). Brands using Indian-spun yarn get neither the higher base rate nor the yarn multiplier — creating a powerful double incentive to switch to Yuma-spun domestic yarn.</div>
+    </div>
+  </div>
+
+  <!-- MULTIPLIER TABLE -->
+  <div class="sh">
+    <div class="sh-tag">§ 3 — Credit Structure</div>
+    <div class="sh-title">Full Credit Multiplier Table — From Bill Text</div>
+    <div class="sh-rule"></div>
+  </div>
+  <table class="mult-table rv">
+    <thead>
+      <tr>
+        <th>Supply Chain Scenario</th>
+        <th>Base %</th>
+        <th>Multiplier</th>
+        <th>Effective Rate</th>
+        <th>Relevance to MATGA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Cotton processed entirely or partly in non-FTA country</strong><br><span style="color:var(--slate);font-size:.78rem">e.g. India, China, Bangladesh, Pakistan, Vietnam</span></td>
+        <td><strong>18%</strong></td>
+        <td><span class="mbadge a">1.0×</span></td>
+        <td><strong>18%</strong> × lbs × price</td>
+        <td>Current India-route brands — lowest possible incentive, highest cost</td>
+      </tr>
+      <tr>
+        <td><strong>All-US processing OR processing only in FTA countries</strong><br><span style="color:var(--slate);font-size:.78rem">CAFTA, USMCA, KORUS, Australia, etc. — no yarn/fabric election</span></td>
+        <td><strong>24%</strong></td>
+        <td><span class="mbadge a">1.0×</span></td>
+        <td><strong>24%</strong> × lbs × price</td>
+        <td>Step up from India route but no processing multiplier claimed</td>
+      </tr>
+      <tr class="matga-row">
+        <td><strong>⭐ US cotton + US-spun yarn (§ 45BB(d)(1))</strong><br><span style="color:var(--slate);font-size:.78rem">Yarn made in United States from qualified cotton — e.g. <strong>Yuma ring-spun</strong></span></td>
+        <td><strong>24%</strong></td>
+        <td><span class="mbadge b">1.6×</span></td>
+        <td><strong>38.4%</strong> × lbs × price</td>
+        <td><strong>🎯 MATGA's exact product.</strong> AZ Pima → Yuma ring-spun yarn → US brand</td>
+      </tr>
+      <tr>
+        <td><strong>US cotton + US-made fabric (§ 45BB(d)(2))</strong><br><span style="color:var(--slate);font-size:.78rem">Fabric woven/knitted in US from US cotton yarn</span></td>
+        <td><strong>24%</strong></td>
+        <td><span class="mbadge c">6.5×</span></td>
+        <td><strong>156%</strong> × lbs × price</td>
+        <td>Next step: US mills weaving Yuma yarn into fabric — LA textile partners</td>
+      </tr>
+      <tr>
+        <td><strong>Full domestic stack: US yarn + US fabric elected separately</strong><br><span style="color:var(--slate);font-size:.78rem">§ 45BB(d) applied separately with election at each stage</span></td>
+        <td><strong>24%</strong></td>
+        <td><span class="mbadge d">Up to 6.5×</span></td>
+        <td><strong>Maximum</strong> credit value</td>
+        <td>LA 2028 vision: AZ cotton → Yuma yarn → LA fabric → LA sewn Olympic shirt</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- CREDIT CALCULATOR -->
+  <div class="sh">
+    <div class="sh-tag">§ 4 — Calculator</div>
+    <div class="sh-title">§ 45BB Credit Estimator</div>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="calc-wrap rv">
+    <div class="calc-title">Estimate Your Annual Tax Credit</div>
+    <div class="calc-sub">Built directly from the § 45BB formula: (lbs of US cotton) × (applicable %) × (3-year average cotton market price). Adjust for your processing stage.</div>
+    <div class="calc-fields">
+      <div class="cf">
+        <label>Annual US Cotton Volume (lbs)</label>
+        <input type="number" id="c-vol" value="500000" min="0" placeholder="e.g. 500,000">
+      </div>
+      <div class="cf">
+        <label>Cotton Market Price ($/lb)</label>
+        <input type="number" id="c-price" value="0.68" min="0" step="0.01" placeholder="e.g. 0.68">
+      </div>
+      <div class="cf">
+        <label>Processing Stage</label>
+        <select id="c-stage">
+          <option value="nonfta">Non-FTA country processing (18% base)</option>
+          <option value="base">US / FTA only — no multiplier (24%)</option>
+          <option value="yarn" selected>US-spun yarn elected — § 45BB(d)(1) (24% × 1.6)</option>
+          <option value="fabric">US-made fabric elected — § 45BB(d)(2) (24% × 6.5)</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-go" onclick="doCalc()">Calculate Credit →</button>
+    <div class="calc-out" id="c-out">
+      <div class="co-cell"><div class="co-l">Base Credit (before multiplier)</div><div class="co-v" id="c-base">—</div><div class="co-s" id="c-base-s">—</div></div>
+      <div class="co-cell"><div class="co-l">After Stage Multiplier</div><div class="co-v" id="c-mult">—</div><div class="co-s" id="c-mult-s">—</div></div>
+      <div class="co-cell"><div class="co-l">Annual § 45BB Credit</div><div class="co-v" id="c-total">—</div><div class="co-s">Transferable per § 6418 — can be sold</div></div>
+    </div>
+  </div>
+
+  <!-- MATGA IMPACT -->
+  <div class="sh">
+    <div class="sh-tag">§ 5 — MATGA Analysis</div>
+    <div class="sh-title">What H.R.7230 Means for Eco-Spun Yuma</div>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="impact-box rv">
+    <div class="ib-pill">🎯 Direct Legislative Tailwind</div>
+    <div class="ib-h">H.R.7230 Was Written <span>For Facilities Like Ours</span></div>
+    <div class="ib-p">The 1.6× yarn multiplier under § 45BB(d)(1) was precisely designed to incentivize domestic ring-spinning — the exact gap the Eco-Spun Yuma facility fills. If enacted, every brand that buys Yuma-spun yarn earns a compounding financial advantage: $1.50/lb lower cost <em>plus</em> a federal tax credit that makes domestic yarn even more attractive than Indian imports. The digital bale tracing system also creates a verified "AZ-grown, Yuma-spun" provenance stamp that commands a genuine market premium.</div>
+    <div class="ib-grid">
+      <div class="ib-cell"><div class="ib-cell-n">38.4%</div><div class="ib-cell-l">Effective § 45BB credit rate for brands using Yuma-spun yarn (24% × 1.6 multiplier)</div></div>
+      <div class="ib-cell"><div class="ib-cell-n">$1.50</div><div class="ib-cell-l">Per-lb cost savings vs. India-routed yarn — before the § 45BB credit even applies</div></div>
+      <div class="ib-cell"><div class="ib-cell-n">§ 6418</div><div class="ib-cell-l">Transferability makes credits sellable — creates private capital market for Yuma facility</div></div>
+      <div class="ib-cell"><div class="ib-cell-n">Pima ✓</div><div class="ib-cell-l">AZ extra long staple cotton explicitly qualifies under § 45BB(c)(2)(A) Agricultural Act § 1111</div></div>
+      <div class="ib-cell"><div class="ib-cell-n">18% Gap</div><div class="ib-cell-l">India-route brands get 18% vs. Yuma-route brands' 38.4% — a 20-point effective rate advantage</div></div>
+      <div class="ib-cell"><div class="ib-cell-n">FTZ #219</div><div class="ib-cell-l">Yuma's Foreign Trade Zone status stacks with § 45BB credits for maximum financial advantage</div></div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="pullquote rv">
+    <div class="pq-text">"The structure of § 45BB is not accidental — the 1.6× multiplier for US-spun yarn is a direct acknowledgment that spinning is the missing link in the domestic cotton supply chain. For the first time, the tax code would reward manufacturers for closing that gap. That is precisely what the High Quality Yarn Ring Spinning USA Initiative in Yuma is designed to do."</div>
+    <div class="pq-src">MATGA Policy Analysis · <span>High Quality Yarn Ring Spinning USA Initiative · Yuma, AZ · February 2026</span></div>
+  </div>
+
+  <!-- COSPONSORS -->
+  <div class="sh">
+    <div class="sh-tag">§ 6 — Cosponsors</div>
+    <div class="sh-title">43 Bipartisan Cosponsors — From Bill Text</div>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="cosponsor-card rv">
+    <div class="cos-h">All Cosponsors Listed in H.R.7230 Introduction (January 22, 2026)</div>
+    <div class="cos-tags">
+      <span class="cos-tag lead">Murphy [R-NC-3] — Sponsor</span>
+      <span class="cos-tag">Sewell [D-AL-7]</span>
+      <span class="cos-tag">Rouzer [R-NC-7]</span>
+      <span class="cos-tag">Espaillat [D-NY-13]</span>
+      <span class="cos-tag">Kustoff [R-TN-8]</span>
+      <span class="cos-tag">David Scott [D-GA-13]</span>
+      <span class="cos-tag">Carey [R-OH-15]</span>
+      <span class="cos-tag">Davis [R-NC-13]</span>
+      <span class="cos-tag">Thompson [D-PA-12]</span>
+      <span class="cos-tag dem">Vicente Gonzalez [D-TX-34]</span>
+      <span class="cos-tag">Moore [R-AL-2]</span>
+      <span class="cos-tag dem">Adams [D-NC-12]</span>
+      <span class="cos-tag">Mann [R-KS-1]</span>
+      <span class="cos-tag dem">Brown [D-OH]</span>
+      <span class="cos-tag">Allen [R-GA-12]</span>
+      <span class="cos-tag dem">Figures [D-AL-1]</span>
+      <span class="cos-tag">Pfluger [R-TX-11]</span>
+      <span class="cos-tag dem">Costa [D-CA-21]</span>
+      <span class="cos-tag">Crawford [R-AR-1]</span>
+      <span class="cos-tag">Bishop [R-NC-8]</span>
+      <span class="cos-tag">Austin Scott [R-GA-8]</span>
+      <span class="cos-tag">Gray [R-TX]</span>
+      <span class="cos-tag">Jackson [R-TX-13]</span>
+      <span class="cos-tag dem">Carbajal [D-CA-24]</span>
+      <span class="cos-tag" style="background:rgba(200,148,26,.07);border-color:rgba(200,148,26,.22);color:#7B5010;">+ 19 additional cosponsors on Congress.gov</span>
+    </div>
+    <div class="cos-note">
+      <strong>States represented in introduction text:</strong> North Carolina, Alabama, New York, Tennessee, Georgia, Ohio, Pennsylvania, Texas, Kansas, California, Arkansas. Cotton-growing states dominate the coalition — notably bipartisan California representation (Carbajal D-CA-24, Costa D-CA-21) directly aligned with Pima cotton and LA textile interests. <a href="https://www.congress.gov/bill/119th-congress/house-bill/7230/cosponsors" target="_blank" style="color:var(--blue)">View full cosponsor list on Congress.gov →</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block rv" style="margin-top:44px;">
+    <div class="cta-h">This Bill Builds the Case for Yuma.<br>Help Get It Passed.</div>
+    <div class="cta-p">H.R.7230 is in committee. Contact your House representative to support the Buying American Cotton Act — and support the High Quality Yarn Ring Spinning USA Initiative in Yuma, AZ.</div>
+    <div class="cta-btns">
+      <a href="https://www.congress.gov/bill/119th-congress/house-bill/7230" target="_blank" class="btn-w">Full Bill Text on Congress.gov →</a>
+      <a href="matga-newsroom.html" class="btn-ghost">← Newsroom</a>
+      <a href="matga-final.html#eda" class="btn-ghost">Our EDA Initiative</a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="ft-logo">M.A.T.G.A <span>🌾</span></div>
+  <div class="ft-copy">High Quality Yarn Ring Spinning USA Initiative · Yuma, AZ · © 2026</div>
+  <div class="ft-links">
+    <a href="matga-final.html">Home</a>
+    <a href="matga-newsroom.html">Newsroom</a>
+    <a href="cotton-journey-map.html">Journey Map</a>
+    <a href="https://www.congress.gov/bill/119th-congress/house-bill/7230" target="_blank">H.R.7230 ↗</a>
+  </div>
+</footer>
+
+<script>
+// ── CALCULATOR ──
+function doCalc(){
+  const vol   = parseFloat(document.getElementById('c-vol').value)   || 0;
+  const price = parseFloat(document.getElementById('c-price').value) || 0;
+  const stage = document.getElementById('c-stage').value;
+  const map   = {nonfta:[.18,1,'18% (non-FTA)','1.0× — no multiplier'],base:[.24,1,'24% base','1.0× — no multiplier'],yarn:[.24,1.6,'24% base','1.6× yarn (§ 45BB(d)(1))'],fabric:[.24,6.5,'24% base','6.5× fabric (§ 45BB(d)(2))']};
+  const [rate,mult,rs,ms] = map[stage];
+  const base  = vol * price * rate;
+  const total = base * mult;
+  const fmt = n => '$' + n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+  document.getElementById('c-base').textContent   = fmt(base);
+  document.getElementById('c-base-s').textContent = rs + ' × ' + vol.toLocaleString() + ' lbs × $' + price + '/lb';
+  document.getElementById('c-mult').textContent   = fmt(total);
+  document.getElementById('c-mult-s').textContent = ms;
+  document.getElementById('c-total').textContent  = fmt(total);
+  document.getElementById('c-out').classList.add('show');
+}
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} });
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
