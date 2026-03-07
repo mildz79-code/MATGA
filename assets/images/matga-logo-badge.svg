@@ -1,0 +1,37 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="220" y2="220">
+      <stop offset="0" stop-color="#0A2E5C"/>
+      <stop offset="1" stop-color="#C8102E"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="55" y1="110" x2="190" y2="130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C8102E"/>
+      <stop offset="1" stop-color="#8A1024"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="110" cy="110" r="104" fill="url(#ring)"/>
+  <circle cx="110" cy="110" r="95" fill="#F7F2E8"/>
+  <circle cx="110" cy="110" r="75" fill="#fff" stroke="#0A2E5C" stroke-width="8"/>
+
+  <path d="M44 110H176" stroke="#C8102E" stroke-width="12"/>
+  <path d="M44 136H176" stroke="#C8102E" stroke-width="12"/>
+
+  <rect x="44" y="68" width="66" height="56" fill="#0A2E5C"/>
+  <g fill="#fff">
+    <circle cx="56" cy="79" r="3"/><circle cx="72" cy="79" r="3"/><circle cx="88" cy="79" r="3"/><circle cx="104" cy="79" r="3"/>
+    <circle cx="64" cy="92" r="3"/><circle cx="80" cy="92" r="3"/><circle cx="96" cy="92" r="3"/>
+    <circle cx="56" cy="105" r="3"/><circle cx="72" cy="105" r="3"/><circle cx="88" cy="105" r="3"/><circle cx="104" cy="105" r="3"/>
+  </g>
+
+  <path d="M40 130C70 98 102 130 142 108C159 99 172 98 186 104C165 116 143 136 110 146C78 156 56 150 40 130Z" fill="url(#ribbon)"/>
+
+  <g transform="translate(26 98)">
+    <circle cx="18" cy="18" r="14" fill="#fff" stroke="#0A2E5C" stroke-width="4"/>
+    <circle cx="30" cy="12" r="12" fill="#fff" stroke="#0A2E5C" stroke-width="4"/>
+    <circle cx="44" cy="18" r="14" fill="#fff" stroke="#0A2E5C" stroke-width="4"/>
+    <path d="M31 38C27 30 27 24 31 16C35 24 35 30 31 38Z" fill="#0A2E5C"/>
+  </g>
+
+  <text x="110" y="35" text-anchor="middle" fill="#0A2E5C" font-family="Arial, sans-serif" font-weight="700" font-size="16">MATGAUSA.ORG</text>
+</svg>
